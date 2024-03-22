@@ -1,0 +1,32 @@
+logging:
+  level:
+    root: INFO
+    com.vm.com.vm.cargosearch.pool: INFO
+  file:
+    name: com.vm
+    path: /
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    url: jdbc:postgresql://flora.db.elephantsql.com:5432/bpjvmqeo?currentSchema=cargo
+    username: bpjvmqeo
+    password: Z7r9RiFcIXBGOkVkROUXpR8XhluwvjzU
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        hbm2ddl:
+          auto: update
+    open-in-view: false
+
+  messages:
+    basename: messages
+
+liquibase:
+  change-log: db.changelog/db.changelog-master.yaml
