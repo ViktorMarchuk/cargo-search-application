@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -15,7 +14,7 @@ import java.util.Set;
 @Builder
 @Table(schema = "cargo", name = "loading")
 @Data
-public class Cargo {
+public class Cargo implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,45 +23,29 @@ public class Cargo {
     @Column(name = "loading_date")
     private LocalDate loadDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "cargo_load_country",
-            joinColumns = @JoinColumn(name = "cargo_id"),
-            inverseJoinColumns = @JoinColumn(name = "country_id")
-    )
-    private Set<Country> loadCountry;
+    @ManyToOne
+    @JoinColumn(name = "country_load_id", nullable = false)
+    private Country countryLoad;
 
-    @ManyToMany
-    @JoinTable(
-            name = "cargo_load_city",
-            joinColumns = @JoinColumn(name = "cargo_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id")
-    )
-    private Set<City> loadCity;
+    @ManyToOne
+    @JoinColumn(name = "city_name_load_id", nullable = false)
+    private City cityLoad;
 
-    @ManyToMany
-    @JoinTable(
-            name = "cargo_unload_country",
-            joinColumns = @JoinColumn(name = "cargo_id"),
-            inverseJoinColumns = @JoinColumn(name = "country_id")
-    )
-    private Set<Country> unloadCountry;
+    @ManyToOne
+    @JoinColumn(name = "country_unload_id", nullable = false)
+    private Country countryUnload;
 
-    @ManyToMany
-    @JoinTable(
-            name = "cargo_unload_city",
-            joinColumns = @JoinColumn(name = "cargo_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id")
-    )
-    private Set<City> unloadCity;
+    @ManyToOne
+    @JoinColumn(name = "city_name_unload_id", nullable = false)
+    private City cityUnload;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "kind_of_transport_id")
-    private Set<KindOfTransport> list;
+    @ManyToOne
+    @JoinColumn(name = "kind_of_transport_id", nullable = false)
+    private KindOfTransport kindOfTransport;
 
     @Column(name = "name_of_load")
-    private String loadName;
+    private String nameOfLoad;
 
     @Column(name = "price")
-    private int price;
+    private Integer price;
 }

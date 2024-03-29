@@ -6,27 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-import java.util.Set;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "country", schema = "cargo")
 @Data
-public class Country {
-
+public class Country implements BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "name_country")
-    private String nameCountry;
-
-    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<City> city;
-
-    @ManyToMany
-    private Set<Cargo> cargoList;
+    @Column(name = "name_country", unique = true, nullable = false)
+    private String name;
 }
