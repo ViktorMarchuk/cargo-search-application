@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -14,16 +13,15 @@ import java.util.Set;
 @Builder
 @Table(schema = "cargo", name = "city")
 @Data
-public class City {
+public class City implements BaseEntity<Integer> {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(name = "name_city")
-    private String nameCity;
+    @Column(name = "name_city", unique = true, nullable = false)
+    private String name;
 
-    @JoinColumn(name = "country_id")
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
-
-    @ManyToMany
-    private Set<Cargo> cargoList;
 }

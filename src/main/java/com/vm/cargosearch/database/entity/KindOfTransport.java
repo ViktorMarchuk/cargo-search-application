@@ -1,22 +1,20 @@
 package com.vm.cargosearch.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(schema = "cargo", name = "kind_of_transport")
-public class KindOfTransport {
+@Data
+public class KindOfTransport implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "kind_transport")
-    private String transportName;
-
+    @Column(name = "kind_transport", unique = true, nullable = false)
+    private String name;
 }

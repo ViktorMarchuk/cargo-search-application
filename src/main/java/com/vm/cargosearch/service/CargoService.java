@@ -1,13 +1,13 @@
 package com.vm.cargosearch.service;
 
 import com.vm.cargosearch.database.repository.CargoRepository;
-import com.vm.cargosearch.mapper.CargoMapper;
+import com.vm.cargosearch.mapper.CargoReadMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@ToString
+@Service
 public class CargoService {
-    private final CargoMapper cargoMapper;
-    private final CargoRepository cargoRepository;
+
 }
