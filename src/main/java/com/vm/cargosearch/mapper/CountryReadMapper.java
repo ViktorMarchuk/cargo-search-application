@@ -10,9 +10,4 @@ public class CountryReadMapper implements Mapper<Country, CountryReadDto> {
     public CountryReadDto map(Country object) {
         return new CountryReadDto(object.getId(), object.getName());
     }
-
-    @Override
-    public CountryReadDto map(Country fromObject, CountryReadDto toObject) {
-        return Mapper.super.map(fromObject, toObject);
-    }
 }

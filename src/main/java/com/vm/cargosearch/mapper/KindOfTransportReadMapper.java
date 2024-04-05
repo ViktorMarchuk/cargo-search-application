@@ -9,9 +9,4 @@ public class KindOfTransportReadMapper implements Mapper<KindOfTransport,KindOfT
     public KindOfTransportReadDto map(KindOfTransport object) {
         return new KindOfTransportReadDto(object.getId(),object.getName());
     }
-
-    @Override
-    public KindOfTransportReadDto map(KindOfTransport fromObject, KindOfTransportReadDto toObject) {
-        return Mapper.super.map(fromObject, toObject);
-    }
 }

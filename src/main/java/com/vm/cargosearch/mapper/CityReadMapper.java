@@ -14,9 +14,4 @@ public class CityReadMapper implements Mapper<City, CityReadDto> {
     public CityReadDto map(City object) {
         return new CityReadDto(object.getId(), object.getName(), countryReadMapper.map(object.getCountry()));
     }
-
-    @Override
-    public CityReadDto map(City fromObject, CityReadDto toObject) {
-        return Mapper.super.map(fromObject, toObject);
-    }
 }
