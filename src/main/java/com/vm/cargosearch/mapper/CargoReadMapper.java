@@ -50,9 +50,4 @@ public class CargoReadMapper implements Mapper<Cargo, CargoReadDto> {
                 object.getPrice()
         );
     }
-
-    @Override
-    public CargoReadDto map(Cargo fromObject, CargoReadDto toObject) {
-        return Mapper.super.map(fromObject, toObject);
-    }
 }
