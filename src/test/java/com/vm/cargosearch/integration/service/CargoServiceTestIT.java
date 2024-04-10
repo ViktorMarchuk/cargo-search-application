@@ -71,10 +71,9 @@ public class CargoServiceTestIT {
                 4800);
 
         CargoReadDto actualResult = cargoService.create(expectedResult);
-        assertEquals(actualResult.getCountryLoad().getCountryName(), expectedResult.getCountryLoad().getName());
-        assertEquals(actualResult.getCityLoad().getName(), expectedResult.getCityLoad().getName());
-        assertEquals(actualResult.getCountryUnload().getCountryName(), expectedResult.getCountryUnload().getName());
-        assertEquals(actualResult.getCountryUnload().getCountryName(), expectedResult.getCountryUnload().getName());
+        assertEquals(actualResult.getCountryLoad().countryName(), expectedResult.getCountryLoad().getName());
+        assertEquals(actualResult.getCityLoad().name(), expectedResult.getCityLoad().getName());
+        assertEquals(actualResult.getCountryUnload().countryName(), expectedResult.getCountryUnload().getName());
         assertEquals(actualResult.getKindOfTransport().name(), expectedResult.getKindOfTransport().getName());
         assertEquals(actualResult.getNameOfLoad(), expectedResult.getNameOfLoad());
         assertEquals(actualResult.getPrice(), expectedResult.getPrice());
@@ -100,10 +99,10 @@ public class CargoServiceTestIT {
         Optional<CargoReadDto> result = cargoService.update(CARGO_ID, expectedResult);
 
         List<CargoReadDto> actualResult = result.stream().collect(Collectors.toList());
-        Optional<String> countryLoadActual = actualResult.stream().map(c -> c.getCountryLoad().getCountryName()).findFirst();
-        Optional<String> cityLoadActual = actualResult.stream().map(c -> c.getCityLoad().getName()).findFirst();
-        Optional<String> countryUnloadActual = actualResult.stream().map(c -> c.getCountryUnload().getCountryName()).findFirst();
-        Optional<String> cityUnloadActual = actualResult.stream().map(c -> c.getCityUnload().getName()).findFirst();
+        Optional<String> countryLoadActual = actualResult.stream().map(c -> c.getCountryLoad().countryName()).findFirst();
+        Optional<String> cityLoadActual = actualResult.stream().map(c -> c.getCityLoad().name()).findFirst();
+        Optional<String> countryUnloadActual = actualResult.stream().map(c -> c.getCountryUnload().countryName()).findFirst();
+        Optional<String> cityUnloadActual = actualResult.stream().map(c -> c.getCityUnload().name()).findFirst();
         Optional<String> transportActual = actualResult.stream().map(c -> c.getKindOfTransport().name()).findFirst();
         Optional<String> loadNameActual = actualResult.stream().map(c -> c.getNameOfLoad()).findFirst();
         Optional<Integer> actualPrice = actualResult.stream().map(c -> c.getPrice()).findFirst();

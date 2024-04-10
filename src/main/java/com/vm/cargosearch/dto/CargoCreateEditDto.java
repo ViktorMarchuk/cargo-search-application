@@ -4,10 +4,12 @@ import com.vm.cargosearch.database.entity.City;
 import com.vm.cargosearch.database.entity.Country;
 import com.vm.cargosearch.database.entity.KindOfTransport;
 import lombok.Value;
+import lombok.experimental.FieldNameConstants;
 
 import java.time.LocalDate;
 
 @Value
+@FieldNameConstants
 public class CargoCreateEditDto {
     LocalDate loadDate;
     Country countryLoad;

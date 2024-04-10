@@ -39,7 +39,9 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
         cargo.setCityLoad(getCity(object.getCityLoad().getId()));
         cargo.setCountryUnload(getCountry(object.getCountryUnload().getId()));
         cargo.setCityUnload(getCity(object.getCityUnload().getId()));
-        cargo.setKindOfTransport(getTransport(object.getKindOfTransport().getId()));
+        if (object.getKindOfTransport() != null) {
+            cargo.setKindOfTransport(getTransport(object.getKindOfTransport().getId()));
+        }
         cargo.setNameOfLoad(object.getNameOfLoad());
         cargo.setPrice(object.getPrice());
     }
