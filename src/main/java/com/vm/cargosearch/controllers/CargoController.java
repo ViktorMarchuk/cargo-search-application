@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/cargo")
@@ -41,12 +42,16 @@ public class CargoController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
-    public String create(@ModelAttribute CargoCreateEditDto cargo) {
-        CargoReadDto dto = cargoService.create(cargo);
-        return "redirect:/cargo/" + dto.getId();
-
-    }
+//    @PostMapping()
+//    public String create(@ModelAttribute CargoCreateEditDto cargo, RedirectAttributes redirectAttributes) {
+//        if (true) {
+//            redirectAttributes.addFlashAttribute("cargo", cargo);
+//            return "redirect:/cargo";
+//        }
+//        CargoReadDto dto = cargoService.create(cargo);
+//        return "redirect:/cargo/" + dto.getId();
+//
+//    }
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id, @ModelAttribute CargoCreateEditDto cargo) {
@@ -55,12 +60,43 @@ public class CargoController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    //@PostMapping("/{id}/delete")
-    @DeleteMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
+//    @DeleteMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
         if (!cargoService.delete(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return "redirect:/cargo";
+        return "redirect:/cargo_all";
     }
+
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        CargoCreateEditDto newCargo = new CargoCreateEditDto();
+        model.addAttribute("newCargo", newCargo);
+        model.addAttribute("country", countryService.findByAll());
+        model.addAttribute("city", cityService.findAll());
+        model.addAttribute("transport", kindOfTransportService.findAll());
+        return "/create_cargo";
+    }
+    @PostMapping()
+    public String create(@ModelAttribute CargoCreateEditDto cargo, RedirectAttributes redirectAttributes) {
+        if (cargoIsValid(cargo)) {
+            redirectAttributes.addFlashAttribute("cargo", cargo);
+            return "redirect:/cargo";
+        }
+        CargoReadDto dto = cargoService.create(cargo);
+        return "redirect:/cargo/" + dto.getId();
+    }
+    private boolean cargoIsValid(CargoCreateEditDto cargo) {
+        // Проверяем, что все обязательные поля заполнены
+        return cargo.getLoadDate() != null
+                && cargo.getCountryLoad() != null
+                && cargo.getCityLoad() != null
+                && cargo.getCountryUnload() != null
+                && cargo.getCityUnload() != null
+                && cargo.getKindOfTransport() != null
+                && cargo.getNameOfLoad() != null
+                && cargo.getPrice() != null;
+    }
+
 }

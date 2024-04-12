@@ -34,16 +34,30 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
     }
 
     private void copy(CargoCreateEditDto object, Cargo cargo) {
-        cargo.setLoadDate(object.getLoadDate());
-        cargo.setCountryLoad(getCountry(object.getCountryLoad().getId()));
-        cargo.setCityLoad(getCity(object.getCityLoad().getId()));
-        cargo.setCountryUnload(getCountry(object.getCountryUnload().getId()));
-        cargo.setCityUnload(getCity(object.getCityUnload().getId()));
+        if (object.getLoadDate() != null) {
+            cargo.setLoadDate(object.getLoadDate());
+        }
+        if (object.getCountryLoad() != null) {
+            cargo.setCountryLoad(getCountry(object.getCountryLoad().getId()));
+        }
+        if (object.getCityLoad() != null) {
+            cargo.setCityLoad(getCity(object.getCityLoad().getId()));
+        }
+        if (object.getCountryLoad() != null) {
+            cargo.setCountryUnload(getCountry(object.getCountryUnload().getId()));
+        }
+        if (object.getCityUnload() != null) {
+            cargo.setCityUnload(getCity(object.getCityUnload().getId()));
+        }
         if (object.getKindOfTransport() != null) {
             cargo.setKindOfTransport(getTransport(object.getKindOfTransport().getId()));
         }
-        cargo.setNameOfLoad(object.getNameOfLoad());
-        cargo.setPrice(object.getPrice());
+        if (object.getNameOfLoad() != null) {
+            cargo.setNameOfLoad(object.getNameOfLoad());
+        }
+        if (object.getPrice() != null && cargo != null) {
+            cargo.setPrice(object.getPrice());
+        }
     }
 
     private KindOfTransport getTransport(Integer transportId) {
