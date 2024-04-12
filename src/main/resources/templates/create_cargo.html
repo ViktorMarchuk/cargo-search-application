@@ -2,21 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Cargo</title>
+    <title>Create cargo</title>
 </head>
 <body>
-<form th:action="@{|/cargo/${cargo.id}/update|}" enctype="multipart/form-data" method="post">
+<form th:action="@{/cargo}" enctype="multipart/form-data" method="post">
     <label for="date">Date:
-        <input id="date" type="date" name="loadDate" th:value="${cargo.loadDate}">
+        <input id="date" type="date" name="loadDate" th:value="${newCargo.nameOfLoad}">
     </label><br>
     <br>
     <div>
         <label for="countryLoad">Loading country:
             <select id="countryLoad" name="countryLoad">
                 <option th:each="countryLoading : ${country}"
-                        th:value="${countryLoading.id}"
-                        th:selected="${countryLoading.id == cargo.countryLoad.id}"
-                        th:text="${countryLoading.countryName}">Loading country
+                        th:value="${countryLoading?.id}"
+                        th:selected="${newCargo != null and countryLoading != null and countryLoading?.id == newCargo?.countryLoad?.id}"
+                        th:text="${countryLoading?.countryName}">Loading country
                 </option>
             </select>
         </label>
@@ -26,7 +26,7 @@
             <select id="citiLoad" name="cityLoad">
                 <option th:each="cityLoading : ${city}"
                         th:value="${cityLoading.id()}"
-                        th:selected="${cityLoading.id() == cargo.cityLoad.id()}"
+                        th:selected="${newCargo != null and cityLoading != null and cityLoading?.id == newCargo?.cityLoad?.id}"
                         th:text="${cityLoading.name()}">Loading city
                 </option>
             </select>
@@ -37,7 +37,7 @@
             <select id="countryUnload" name="countryUnload">
                 <option th:each="countryUnload : ${country}"
                         th:value="${countryUnload.id()}"
-                        th:selected="${countryUnload.id() == cargo.countryUnload.id()}"
+                        th:selected="${newCargo != null and countryUnload !=null and countryUnload?.id == newCargo?.cityLoad?.id}"
                         th:text="${countryUnload.countryName()}">Unloading country
                 </option>
             </select>
@@ -48,7 +48,7 @@
             <select id="cityUnload" name="cityUnload">
                 <option th:each="cityUnload : ${city}"
                         th:value="${cityUnload.id()}"
-                        th:selected="${cityUnload.id() == cargo.cityUnload.id()}"
+                        th:selected="${newCargo != null and cityUnload != null and cityUnload?.id == newCargo?.cityUnload?.id}"
                         th:text="${cityUnload.name()}">Unloading city
                 </option>
             </select>
@@ -59,25 +59,21 @@
             <select id="transport" name="kindOfTransport">
                 <option th:each="transportName : ${transport}"
                         th:value="${transportName.id()}"
-                        th:selected="${transportName.id() == cargo.kindOfTransport.id()}"
+                        th:selected="${newCargo != null and transportName != null and transportName?.id == newCargo.kindOfTransport?.id}"
                         th:text="${transportName.name()}">Kind of transport
                 </option>
             </select>
         </label>
     </div>
     <label for="cargoName">Description of cargo:
-        <input id="cargoName" type="text" name="nameOfLoad" th:value="${cargo.nameOfLoad}">
+        <input id="cargoName" type="text" name="nameOfLoad" th:value="${newCargo.nameOfLoad}">
     </label><br>
     <br>
     <label for="price">Freight rate:
-        <input id="price" type="text" name="price" th:value="${cargo.price}">
+        <input id="price" type="text" name="price" th:value="${newCargo.price}">
     </label><br>
     <br>
-    <button type="submit">Update loading</button>
-</form>
-<br>
-<form th:action="@{/cargo/{cargoId}/delete(cargoId=${cargo.id})}" method="post">
-    <button type="submit">Delete</button>
+        <button type="submit">Create loading</button>
 </form>
 </body>
 </html>

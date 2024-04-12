@@ -3,29 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>All cargo</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
         body {
             background-color: #FFEBCD; /* бледно-оранжевый цвет фона */
         }
+
         h2 {
             text-align: center; /* выравнивание заголовка по центру */
             margin-bottom: 20px; /* нижний отступ заголовка */
         }
+
         table {
             margin: auto; /* центрирование таблицы по горизонтали */
             border-collapse: collapse; /* объединение границ ячеек */
             width: 80%; /* ширина таблицы */
             margin-top: 20px; /* верхний отступ таблицы */
         }
+
         th, td {
             border: 1px solid black; /* границы ячеек */
             padding: 8px; /* внутренний отступ ячеек */
             text-align: left; /* выравнивание текста по левому краю */
         }
+
         th {
             background-color: #FFA500; /* оранжевый цвет фона ячеек заголовков */
             color: white; /* белый цвет текста в заголовках */
         }
+
+        .centered {
+            text-align: center; /* Выравнивание текста по центру */
+        }
+
+        .bold-border {
+            font-weight: bold;
+            border: 2px solid black; /* Увеличьте толщину рамки до 2px */
+            padding: 10px; /* Увеличьте внутренний отступ для лучшего визуального эффекта */
+            display: inline-block; /* Установите элемент как блочный и центрируйте его */
+            background-color: white; /* Белый фон внутри рамки */
+            text-decoration: none; /* Уберите подчеркивание ссылки */
+            color: black; /* Цвет текста */
+        }
+
+
     </style>
 </head>
 <body>
@@ -58,5 +79,10 @@
     </tr>
     </tbody>
 </table>
+<br>
+<br>
+<form action="/cargo/registration">
+    <button type="submit">Create new cargo</button>
+</form>
 </body>
 </html>
