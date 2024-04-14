@@ -3,6 +3,7 @@ package com.vm.cargosearch.dto;
 import com.vm.cargosearch.database.entity.City;
 import com.vm.cargosearch.database.entity.Country;
 import com.vm.cargosearch.database.entity.KindOfTransport;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;

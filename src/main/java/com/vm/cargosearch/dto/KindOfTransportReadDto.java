@@ -1,6 +1,5 @@
 package com.vm.cargosearch.dto;
 
-public record KindOfTransportReadDto(int id,
-                                     String name){
-
+public record KindOfTransportReadDto(Integer id,
+                                     String name) {
 }

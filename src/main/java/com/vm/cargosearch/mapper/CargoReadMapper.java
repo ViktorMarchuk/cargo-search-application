@@ -34,10 +34,14 @@ public class CargoReadMapper implements Mapper<Cargo, CargoReadDto> {
         CityReadDto cityUnload = Optional.ofNullable(object.getCityUnload())
                 .map(cityReadMapper::map)
                 .orElse(null);
-
         KindOfTransportReadDto transport = Optional.ofNullable(object.getKindOfTransport())
                 .map(kindOfTransportReadMapper::map)
                 .orElse(null);
+        Integer price = object.getPrice();
+        Integer priceValue = 0;
+        if (price == null) {
+            price = priceValue;
+        }
 
         return new CargoReadDto(object.getId(),
                 object.getLoadDate(),
@@ -47,7 +51,7 @@ public class CargoReadMapper implements Mapper<Cargo, CargoReadDto> {
                 cityUnload,
                 transport,
                 object.getNameOfLoad(),
-                object.getPrice()
+                price
         );
     }
 }
