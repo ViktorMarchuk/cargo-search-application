@@ -2,6 +2,7 @@ package com.vm.cargosearch.service;
 
 import com.vm.cargosearch.database.repository.CargoRepository;
 import com.vm.cargosearch.dto.CargoCreateEditDto;
+import com.vm.cargosearch.dto.CargoFilter;
 import com.vm.cargosearch.dto.CargoReadDto;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.mapper.CargoReadMapper;
@@ -20,6 +21,14 @@ public class CargoService {
     private final CargoRepository cargoRepository;
     private final CargoReadMapper cargoReadMapper;
     private final CargoCreateEditMapper cargoCreateEditMapper;
+
+    public List<CargoReadDto> findAllByFilter(CargoFilter filter) {
+        return cargoRepository.findAllByFilter(filter)
+                .stream()
+                .map(cargoReadMapper::map)
+                .collect(Collectors.toList());
+    }
+
 
     public List<CargoReadDto> findAll() {
         return cargoRepository.findAll()

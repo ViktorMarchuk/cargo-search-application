@@ -1,18 +1,22 @@
 package com.vm.cargosearch.controllers;
 
-import com.vm.cargosearch.dto.CargoCreateEditDto;
-import com.vm.cargosearch.dto.CargoReadDto;
+import com.vm.cargosearch.database.entity.Country;
+import com.vm.cargosearch.database.entity.KindOfTransport;
+import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.service.CargoService;
 import com.vm.cargosearch.service.CityService;
 import com.vm.cargosearch.service.CountryService;
 import com.vm.cargosearch.service.KindOfTransportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/cargo")
@@ -24,10 +28,22 @@ public class CargoController {
     private final KindOfTransportService kindOfTransportService;
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("cargo", cargoService.findAll());
+    public String findAll(Model model,
+                          @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
+                          @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
+                          @RequestParam(value = "countryLoad", required = false) String countryLoadName,
+                          @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
+                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName) {
+
+        CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
+        CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
+        KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
+        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
+        model.addAttribute("cargo", cargoService.findAllByFilter(filter));
+
         return "cargo_all";
     }
+
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model) {
@@ -78,6 +94,7 @@ public class CargoController {
         model.addAttribute("transport", kindOfTransportService.findAll());
         return "/create_cargo";
     }
+
     @PostMapping()
     public String create(@ModelAttribute CargoCreateEditDto cargo, RedirectAttributes redirectAttributes) {
         if (cargoIsValid(cargo)) {
@@ -87,8 +104,8 @@ public class CargoController {
         CargoReadDto dto = cargoService.create(cargo);
         return "redirect:/cargo/" + dto.getId();
     }
+
     private boolean cargoIsValid(CargoCreateEditDto cargo) {
-        // Проверяем, что все обязательные поля заполнены
         return cargo.getLoadDate() != null
                 && cargo.getCountryLoad() != null
                 && cargo.getCityLoad() != null
