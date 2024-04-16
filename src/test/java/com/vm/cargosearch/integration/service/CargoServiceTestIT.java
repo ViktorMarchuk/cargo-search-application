@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RequiredArgsConstructor
 public class CargoServiceTestIT {
     private final CargoService cargoService;
-    private final Long CARGO_ID = 14L;
+    private final Long CARGO_ID = 1L;
     private final int EXPECTED_PRICE = 4800;
 
 
