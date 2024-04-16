@@ -9,6 +9,7 @@ import com.vm.cargosearch.database.repository.CountryRepository;
 import com.vm.cargosearch.database.repository.KindOfTransportRepository;
 import com.vm.cargosearch.dto.CargoCreateEditDto;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

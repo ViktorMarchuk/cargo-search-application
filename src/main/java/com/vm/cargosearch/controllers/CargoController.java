@@ -12,11 +12,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargo")
@@ -58,23 +61,34 @@ public class CargoController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-//    @PostMapping()
-//    public String create(@ModelAttribute CargoCreateEditDto cargo, RedirectAttributes redirectAttributes) {
-//        if (true) {
-//            redirectAttributes.addFlashAttribute("cargo", cargo);
-//            return "redirect:/cargo";
-//        }
-//        CargoReadDto dto = cargoService.create(cargo);
-//        return "redirect:/cargo/" + dto.getId();
-//
-//    }
+    @PostMapping("/create")
+    public String create(@ModelAttribute CargoCreateEditDto cargo, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("cargo", cargo);
+            return "redirect:/cargo/registration";
+        }
+        CargoReadDto dto = cargoService.create(cargo);
+        return "redirect:/cargo";
 
-    @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Long id, @ModelAttribute CargoCreateEditDto cargo) {
-        return cargoService.update(id, cargo)
-                .map(it -> "redirect:/cargo/{id}")
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
+    //    @PostMapping("/{id}/update")
+//    public String update(@PathVariable("id") Long id, @ModelAttribute CargoCreateEditDto cargo) {
+//        return cargoService.update(id, cargo)
+//                .map(it -> "redirect:/cargo/{id}")
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//    }
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable("id") Long id,
+                         @ModelAttribute @Validated CargoCreateEditDto cargo) {
+        Optional<CargoReadDto> updatedCargo = cargoService.update(id, cargo);
+        if (updatedCargo.isPresent()) {
+            return "redirect:/cargo";
+
+        }
+        return "redirect:/cargo/{id}";
+    }
+
 
     @PostMapping("/{id}/delete")
 //    @DeleteMapping("/{id}/delete")
@@ -82,38 +96,15 @@ public class CargoController {
         if (!cargoService.delete(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return "redirect:/cargo_all";
+        return "redirect:/cargo";
     }
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        CargoCreateEditDto newCargo = new CargoCreateEditDto();
-        model.addAttribute("newCargo", newCargo);
+        model.addAttribute("newCargo", new CargoCreateEditDto());
         model.addAttribute("country", countryService.findByAll());
         model.addAttribute("city", cityService.findAll());
         model.addAttribute("transport", kindOfTransportService.findAll());
         return "/create_cargo";
     }
-
-    @PostMapping()
-    public String create(@ModelAttribute CargoCreateEditDto cargo, RedirectAttributes redirectAttributes) {
-        if (cargoIsValid(cargo)) {
-            redirectAttributes.addFlashAttribute("cargo", cargo);
-            return "redirect:/cargo";
-        }
-        CargoReadDto dto = cargoService.create(cargo);
-        return "redirect:/cargo/" + dto.getId();
-    }
-
-    private boolean cargoIsValid(CargoCreateEditDto cargo) {
-        return cargo.getLoadDate() != null
-                && cargo.getCountryLoad() != null
-                && cargo.getCityLoad() != null
-                && cargo.getCountryUnload() != null
-                && cargo.getCityUnload() != null
-                && cargo.getKindOfTransport() != null
-                && cargo.getNameOfLoad() != null
-                && cargo.getPrice() != null;
-    }
-
 }

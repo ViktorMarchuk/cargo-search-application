@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface CargoRepository extends JpaRepository<Cargo, Integer>, FilterCargoRepository {
     Optional<Cargo> findById(Long integer);
+    Optional<Cargo>save(Long id);
 }
