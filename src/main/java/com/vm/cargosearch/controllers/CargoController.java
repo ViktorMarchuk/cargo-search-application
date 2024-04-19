@@ -7,6 +7,7 @@ import com.vm.cargosearch.service.CargoService;
 import com.vm.cargosearch.service.CityService;
 import com.vm.cargosearch.service.CountryService;
 import com.vm.cargosearch.service.KindOfTransportService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -62,40 +63,12 @@ public class CargoController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute CargoCreateEditDto cargo, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String create(@ModelAttribute("newCargo") @Validated CargoCreateEditDto cargo, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("cargo", cargo);
-            return "redirect:/cargo/registration";
+            redirectAttributes.addFlashAttribute("newCargo", cargo);
+            return "redirect:registration";
         }
-        CargoReadDto dto = cargoService.create(cargo);
-        return "redirect:/cargo";
-
-    }
-
-    //    @PostMapping("/{id}/update")
-//    public String update(@PathVariable("id") Long id, @ModelAttribute CargoCreateEditDto cargo) {
-//        return cargoService.update(id, cargo)
-//                .map(it -> "redirect:/cargo/{id}")
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//    }
-    @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Long id,
-                         @ModelAttribute @Validated CargoCreateEditDto cargo) {
-        Optional<CargoReadDto> updatedCargo = cargoService.update(id, cargo);
-        if (updatedCargo.isPresent()) {
-            return "redirect:/cargo";
-
-        }
-        return "redirect:/cargo/{id}";
-    }
-
-
-    @PostMapping("/{id}/delete")
-//    @DeleteMapping("/{id}/delete")
-    public String delete(@PathVariable("id") Long id) {
-        if (!cargoService.delete(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        cargoService.create(cargo);
         return "redirect:/cargo";
     }
 
@@ -106,5 +79,25 @@ public class CargoController {
         model.addAttribute("city", cityService.findAll());
         model.addAttribute("transport", kindOfTransportService.findAll());
         return "/create_cargo";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable("id") Long id,
+                         @ModelAttribute @Validated CargoCreateEditDto cargo, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("newCargo", cargo);
+            return "redirect:/cargo/{id}";
+        }
+        cargoService.update(id, cargo);
+        return "redirect:/cargo";
+    }
+
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
+        if (!cargoService.delete(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return "redirect:/cargo";
     }
 }

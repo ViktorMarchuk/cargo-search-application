@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>All cargo</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <style>
     body {
         background-color: #FFEBCD;
@@ -50,7 +50,7 @@
     }
 
     .filter-label {
-        font-size: 12px; /* Размер текста названий фильтров */
+        font-size: 15px; /* Размер текста названий фильтров */
         margin-bottom: 5px;
         display: block;
     }
@@ -74,6 +74,14 @@
         display: block;
         border-radius: 3px;
     }
+    .footer {
+        position: absolute; /* Изменяем позиционирование на absolute */
+        top: 15px; /* Размещаем вверху */
+        right: 15px; /* Размещаем справа */
+        color: #666; /* Цвет текста */
+        font-size: 20px; /* Размер текста */
+        white-space: nowrap; /* Отключение переноса текста на новую строку */
+    }
 </style>
 </head>
 <body>
@@ -90,7 +98,7 @@
         <input class="filter-input" id="countryUnload" type="text" name="countryUnload">
         <label class="filter-label" for="kindOfTransport">Kind of transport:</label>
         <input class="filter-input" id="kindOfTransport" type="text" name="kindOfTransport">
-        <button class="submit-button" type="submit">Filter:</button>
+        <button class="submit-button" type="submit">Filter</button>
     </form>
     <form action="/cargo/registration">
         <button class="create-button" type="submit">Create new cargo</button>
@@ -128,6 +136,9 @@
         </th:block>
         </tbody>
     </table>
+</div>
+<div class="footer">
+    @developed by Viktor Marchuk
 </div>
 </body>
 </html>

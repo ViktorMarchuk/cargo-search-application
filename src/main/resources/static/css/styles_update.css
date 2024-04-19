@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFEBCD;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+form {
+    background-color: #FFA500; /* Оранжевый фон формы */
+    width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #343a40; /* Черный текст */
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da; /* Светло-серый контур */
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50; /* Зеленый цвет кнопок */
+    color: #fff; /* Белый текст */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+    margin-top: 10px; /* Поднятие кнопки чуть выше */
+    display: block; /* Размещение кнопки в одной строке с шириной контейнера */
+    width: 100%; /* Ширина кнопки по ширине формы */
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049; /* Темно-зеленый фон кнопки при наведении */
+}
+
+.error-message {
+    color: red; /* Красный текст для сообщений об ошибках */
+    margin-top: 5px;
+}
+
+th {
+    background-color: #FFA500; /* Оранжевый фон заголовков таблиц */
+    /*color: white; !* Белый текст для заголовков таблиц *!*/
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
