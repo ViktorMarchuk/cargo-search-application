@@ -20,14 +20,19 @@ public class CargoCreateEditDto {
     @NotNull(message = "Choose date")
     LocalDate loadDate;
 
+    @NotNull(message = "Fill country name")
     Country countryLoad;
 
+    @NotNull(message = "Fill city name")
     City cityLoad;
 
+    @NotNull(message = "Fill country name")
     Country countryUnload;
 
+    @NotNull(message = "Fill city name")
     City cityUnload;
 
+    @NotNull(message = "Fill kind of transport")
     KindOfTransport kindOfTransport;
 
     @NotBlank(message = "Fill name of load")

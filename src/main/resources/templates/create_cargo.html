@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Create cargo</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -61,6 +60,8 @@
             .error-message {
                 color: red;
                 margin-top: 5px;
+                font-weight: bold;
+                border-color: brown;
             }
 
             th {
@@ -77,10 +78,13 @@
 <h2 >Form for create cargo</h2>
 <form th:action="@{/cargo/create}" enctype="multipart/form-data" method="post">
     <label>Date:</label>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.loadDate')}" th:errors="*{newCargo.loadDate}">Error date</div>
+    <input type="hidden" name="newCargo" th:value="${newCargo}" />
     <input id="loadDate" type="date" name="loadDate" th:field="${newCargo.loadDate}"/>
-    <div class="error-message" th:if="${#fields.hasErrors('newCargo.loadDate')}" th:errors="*{newCargo.loadDate}"></div>
     <label>Loading country:</label>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.countryLoad')}" th:errors="*{newCargo.countryLoad}">Error country</div>
     <select id="countryLoad" name="countryLoad">
+        <option value="">Select country:</option>
         <option th:each="countryLoading : ${country}"
                 th:value="${countryLoading?.id}"
                 th:selected="${newCargo != null and countryLoading != null and countryLoading?.id == newCargo?.countryLoad?.id}"
@@ -88,7 +92,9 @@
         </option>
     </select>
     <label>Loading city:</label>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.cityLoad')}" th:errors="*{newCargo.cityLoad}">Error city</div>
     <select id="cityLoad" name="cityLoad">
+        <option value="">Select city:</option>
         <option th:each="cityLoading : ${city}"
                 th:value="${cityLoading.id()}"
                 th:selected="${newCargo != null and cityLoading != null and cityLoading?.id == newCargo?.cityLoad?.id}"
@@ -96,7 +102,9 @@
         </option>
     </select>
     <label>Unloading country:</label>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.countryUnload')}" th:errors="*{newCargo.countryUnload}">Error country</div>
     <select id="countryUnload" name="countryUnload">
+        <option value="">Select country:</option>
         <option th:each="countryUnload : ${country}"
                 th:value="${countryUnload.id()}"
                 th:selected="${newCargo != null and countryUnload !=null and countryUnload?.id == newCargo?.cityLoad?.id}"
@@ -104,7 +112,9 @@
         </option>
     </select>
     <label>Unloading city:</label>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.cityUnload')}" th:errors="*{newCargo.cityUnload}">Error city</div>
     <select id="cityUnload" name="cityUnload">
+        <option value="">Select city:</option>
         <option th:each="cityUnload : ${city}"
                 th:value="${cityUnload.id()}"
                 th:selected="${newCargo != null and cityUnload != null and cityUnload?.id == newCargo?.cityUnload?.id}"
@@ -112,7 +122,9 @@
         </option>
     </select>
     <label>Kind of transport:</label>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.kindOfTransport')}" th:errors="*{newCargo.kindOfTransport}">Error transport</div>
     <select id="transport" name="kindOfTransport">
+        <option value="">Select kind of transport:</option>
         <option th:each="transportName : ${transport}"
                 th:value="${transportName.id()}"
                 th:selected="${newCargo != null and transportName != null and transportName?.id == newCargo.kindOfTransport?.id}"
@@ -120,11 +132,14 @@
         </option>
     </select>
     <label>Description of cargo:</label>
-    <input id="cargoName" type="text" name="nameOfLoad" th:field="${newCargo.nameOfLoad}"><br>
-    <div class="error-message" th:if="${#fields.hasErrors('newCargo.nameOfLoad')}" th:errors="*{newCargo.nameOfLoad}"></div>
+    <div class="error-message" th:if="${#fields.hasErrors('newCargo.nameOfLoad')}" th:errors="*{newCargo.nameOfLoad}">Error name</div>
+    <input id="cargoName" type="text" name="nameOfLoad" th:field="${newCargo.nameOfLoad}" data-th-value="${newCargo?.nameOfLoad}"><br>
     <label>Freight rate:</label>
     <input id="price" type="number" name="price" th:value="${newCargo.price}"><br><br>
     <button type="submit" >Create loading</button>
+</form>
+<form action="/cargo">
+    <button type="submit">To main page</button>
 </form>
 </body>
 </html>
