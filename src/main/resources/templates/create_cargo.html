@@ -18,14 +18,14 @@
             form {
                 background-color: #FFA500;
                 width: 500px;
-                padding: 20px;
+                padding: 5px;
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             }
 
             label {
                 display: block;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
                 color: #343a40;
             }
 
@@ -86,11 +86,12 @@
     <select id="countryLoad" name="countryLoad">
         <option value="">Select country:</option>
         <option th:each="countryLoading : ${country}"
-                th:value="${countryLoading?.id}"
-                th:selected="${newCargo != null and countryLoading != null and countryLoading?.id == newCargo?.countryLoad?.id}"
-                th:text="${countryLoading?.countryName}">Loading country
+                th:value="${countryLoading.id}"
+                th:selected="${countryLoading.id == selectedCountryLoadId}"
+                th:text="${countryLoading.countryName}">Loading country
         </option>
     </select>
+
     <label>Loading city:</label>
     <div class="error-message" th:if="${#fields.hasErrors('newCargo.cityLoad')}" th:errors="*{newCargo.cityLoad}">Error city</div>
     <select id="cityLoad" name="cityLoad">

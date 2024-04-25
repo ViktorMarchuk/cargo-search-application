@@ -16,6 +16,8 @@ import java.time.LocalDate;
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class CargoCreateEditDto {
+    Long id;
+
     @FutureOrPresent(message = "The date must be current or future")
     @NotNull(message = "Choose date")
     LocalDate loadDate;
