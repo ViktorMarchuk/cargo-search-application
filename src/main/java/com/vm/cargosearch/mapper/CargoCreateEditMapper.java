@@ -35,6 +35,9 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
     }
 
     private void copy(CargoCreateEditDto object, Cargo cargo) {
+        if (object.getId() != null) {
+            cargo.setId(object.getId());
+        }
         if (object.getLoadDate() != null) {
             cargo.setLoadDate(object.getLoadDate());
         }
