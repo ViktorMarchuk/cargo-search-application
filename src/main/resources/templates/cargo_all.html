@@ -3,86 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title>All cargo</title>
-
     <style>
-    body {
-        background-color: #FFEBCD;
-        display: flex;
-        flex-direction: row;
-    }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 90%; /* Положение по вертикали */
+            left: 0;
+            margin-left: 20px; /* Сдвигаем линию вправо на 20px */
+            margin-right: 20px; /* Сдвигаем линию влево на 20px */
+            width: calc(100% - 40px); /* Ширина линии, чтобы она протягивалась по всей ширине страницы, учитывая сдвиги */
+            height: 2px; /* Высота линии */
+            background-color: darkgray; /* Цвет линии */
+            z-index: 9999; /* Установка z-index, чтобы линия отображалась поверх других элементов */
+        }
 
-    .table-container {
-        width: 250%; /* Ширина таблицы */
-        margin-left: 10px; /* Отступ слева */
-    }
+        body {
+            background-color: #FFEBCD;
+            display: flex;
+            flex-direction: row;
+        }
 
-    .filters-container {
-        width: 30%; /* Ширина контейнера с фильтрами */
-        margin-left: 10px; /* Отступ слева */
-    }
+        .table-container {
+            width: 250%;
+            margin-left: 10px;
+        }
 
-    h2 {
-        margin-top: 80px; /* Увеличиваем отступ сверху */
-        margin-bottom: 10px; /* Отступ снизу */
-    }
+        .filters-container {
+            width: 30%;
+            margin-left: 10px;
+        }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 40px;
-        margin-right: 250px
-    }
+        h2 {
+            margin-top: 90px;
+            margin-bottom: 10px;
+        }
 
-    table {
-        border-collapse: collapse;
-        width: 100%; /* Растягиваем таблицу на всю ширину контейнера */
-        margin-top: 20px;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-right: 350px;
+            border-bottom: 10px solid #dcd582;
+            margin-bottom: 18px;
+            border-top: 10px solid #dcd582;
+            width: 100%;
+            letter-spacing: 5px;
+        }
 
-    th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-    }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
 
-    th {
-        background-color: #FFA500;
-        color: white;
-    }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
 
-    .filter-label {
-        font-size: 15px; /* Размер текста названий фильтров */
-        margin-bottom: 5px;
-        display: block;
-    }
+        th {
+            background-color: #FFA500;
+            color: white;
+        }
 
-    .filter-input {
-        margin-bottom: 5px; /* Отступ между полями ввода */
-        width: 100%; /* Ширина поля ввода, занимающая всю доступную ширину */
-        font-size: 12px; /* Размер текста в полях ввода */
-    }
+        .filter-label {
+            font-size: 15px;
+            margin-bottom: 5px;
+            display: block;
+        }
 
-    .submit-button, .create-button {
-        width: 100%; /* Ширина кнопок, занимающая всю доступную ширину */
-        font-size: 12px; /* Размер текста на кнопках */
-        margin-top: 5px; /* Отступ между кнопками и полями ввода */
-        background-color: #4CAF50; /* Зеленый цвет кнопок */
-        border: none;
-        color: white;
-        padding: 5px 10px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        border-radius: 3px;
-    }
-    .footer {
-        position: absolute; /* Изменяем позиционирование на absolute */
-        top: 15px; /* Размещаем вверху */
-        right: 15px; /* Размещаем справа */
-        color: #666; /* Цвет текста */
-        font-size: 20px; /* Размер текста */
-        white-space: nowrap; /* Отключение переноса текста на новую строку */
-    }
-</style>
+        .filter-input {
+            margin-bottom: 5px;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .submit-button, .create-button {
+            width: 100%;
+            font-size: 12px;
+            margin-top: 5px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            border-radius: 3px;
+        }
+
+        .footer {
+            position: absolute;
+            top: 770px;
+            right: 15px;
+            color: #666;
+            font-size: 20px;
+            white-space: nowrap;
+            margin-top: 45px;
+            white-space: pre-line;
+        }
+
+        /* Позиционирование пагинации */
+        .pagination-container {
+            position: fixed;
+            bottom: 110px;
+            left: 230px;
+            font-weight: bold;
+        }
+
+        .horizontal-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%; /* Ширина линии, чтобы она протягивалась по всей ширине страницы */
+            height: 2px; /* Высота линии */
+            background-color: black; /* Цвет линии */
+        }
+
+        #currentDateTime {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        #currentDate {
+            font-size: 17px;
+            font-weight: bold;
+        }
+       .datetime-container{
+           position: absolute;
+           bottom: 850px;
+           left: 15px;
+       }
+    </style>
 </head>
 <body>
 <div class="filters-container">
@@ -103,9 +155,12 @@
     <form action="/cargo/registration">
         <button class="create-button" type="submit">Create new cargo</button>
     </form>
+    <form action="/cargo">
+        <button class="create-button" type="submit">To main page</button>
+    </form>
 </div>
 <div class="table-container">
-    <h1>Download  list</h1>
+    <h1> Download list </h1>
     <table border="5">
         <thead>
         <tr>
@@ -125,11 +180,12 @@
             <tr th:each="loading : ${cargo}" th:if="${loading != null}">
                 <td><a th:href="@{'/cargo/'+ ${loading.id}}" th:text="${loading.id}">Id</a></td>
                 <td th:text="${loading.loadDate}">Date</td>
-                <td th:text="${loading.countryLoad != null ? loading.countryLoad.countryName : ''}">Load Country Name</td>
+                <td th:text="${loading.countryLoad != null ? loading.countryLoad.name : ''}">Load Country Name</td>
                 <td th:text="${loading.cityLoad != null ? loading.cityLoad.name : ''}">Loading city</td>
-                <td th:text="${loading.countryUnload != null ? loading.countryUnload.countryName : ''}">Unload Country Name</td>
+                <td th:text="${loading.countryUnload != null ? loading.countryUnload.name : ''}">Unload Country Name
+                </td>
                 <td th:text="${loading.cityUnload != null ? loading.cityUnload.name : ''}">Unload city</td>
-                <td th:text="${loading.kindOfTransport != null ? loading.kindOfTransport.name() : ''}">Transport</td>
+                <td th:text="${loading.kindOfTransport != null ? loading.kindOfTransport.name : ''}">Transport</td>
                 <td th:text="${loading.nameOfLoad}">Name of cargo</td>
                 <td th:text="${loading.price}">Price</td>
             </tr>
@@ -137,10 +193,43 @@
         </tbody>
     </table>
 </div>
+<div class="horizontal-line"></div>
 <div class="footer">
-    @developed by Viktor Marchuk
+    <span>© Viktor Marchuk,  2024</span>
+    <span>viktor.marchuk0207@gmail.com</span>
+    <span>+375296408606</span>
 </div>
+<div class="pagination-container">
+    <div class="total-rows">
+        Total pages: [[${totalPages}]]
+    </div>
+    <div class="page-numbers">
+        Page numbers:
+        <span th:each="pageNo, iterStat: ${#numbers.sequence(1, totalPages)}">
+            <a class="page-link" th:href="@{'/cargo?pageNo=' + ${pageNo}}">[[${pageNo}]]</a>
+            <span th:if="${!iterStat.last}">, </span>
+        </span>
+    </div>
+</div>
+<div class="datetime-container">
+    <div>
+        <span id="currentDateLabel">Current date:</span>
+        <span id="currentDate"></span>
+    </div>
+    <div>
+        <span id="currentTimeLabel">Current time:</span>
+        <span id="currentDateTime"></span>
+    </div>
+</div>
+<script>
+    function updateDateTime() {
+        var currentDate = new Date(); // Получаем текущую дату и время
+        var formattedDate = currentDate.toLocaleDateString(); // Форматируем дату
+        var formattedTime = currentDate.toLocaleTimeString(); // Форматируем время
+        document.getElementById('currentDate').textContent = formattedDate; // Обновляем элемент на странице
+        document.getElementById('currentDateTime').textContent = formattedTime; // Обновляем элемент на странице
+    }
+    setInterval(updateDateTime, 1000);
+</script>
 </body>
 </html>
-
-

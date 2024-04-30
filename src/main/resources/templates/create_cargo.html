@@ -88,7 +88,7 @@
         <option th:each="countryLoading : ${country}"
                 th:value="${countryLoading.id}"
                 th:selected="${countryLoading.id == selectedCountryLoadId}"
-                th:text="${countryLoading.countryName}">Loading country
+                th:text="${countryLoading.name}">Loading country
         </option>
     </select>
 
@@ -109,7 +109,7 @@
         <option th:each="countryUnload : ${country}"
                 th:value="${countryUnload.id()}"
                 th:selected="${newCargo != null and countryUnload !=null and countryUnload?.id == newCargo?.cityLoad?.id}"
-                th:text="${countryUnload.countryName()}">Unloading country
+                th:text="${countryUnload.name()}">Unloading country
         </option>
     </select>
     <label>Unloading city:</label>
