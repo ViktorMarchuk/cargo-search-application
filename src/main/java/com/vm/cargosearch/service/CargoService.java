@@ -1,5 +1,6 @@
 package com.vm.cargosearch.service;
 
+import com.vm.cargosearch.database.entity.Cargo;
 import com.vm.cargosearch.database.repository.CargoRepository;
 import com.vm.cargosearch.dto.CargoCreateEditDto;
 import com.vm.cargosearch.dto.CargoFilter;
@@ -7,6 +8,10 @@ import com.vm.cargosearch.dto.CargoReadDto;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.mapper.CargoReadMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,5 +74,13 @@ public class CargoService {
                     return true;
                 })
                 .orElse(false);
+    }
+
+    public Page<Cargo> findByPage(int pageNo, int pageSize, CargoFilter filter) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        List<Cargo> filteredCargo = cargoRepository.findAllByFilter(filter);
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > filteredCargo.size() ? filteredCargo.size() : (start + pageable.getPageSize());
+        return new PageImpl<>(filteredCargo.subList(start, end), pageable, filteredCargo.size());
     }
 }

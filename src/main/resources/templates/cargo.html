@@ -89,7 +89,7 @@
             <option value="" disabled selected hidden>Select country:</option>
             <option th:each="countryLoading : ${country}"
                     th:value="${countryLoading?.id}"
-                    th:text="${countryLoading?.countryName}">Loading country
+                    th:text="${countryLoading?.name}">Loading country
             </option>
         </select>
     </div>
@@ -111,7 +111,7 @@
                 <option value="" disabled selected hidden>Select country:</option>
                 <option th:each="countryUnload : ${country}"
                         th:value="${countryUnload.id()}"
-                        th:text="${countryUnload.countryName()}">Unloading country
+                        th:text="${countryUnload.name()}">Unloading country
                 </option>
             </select>
         </label>

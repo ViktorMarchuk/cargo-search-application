@@ -29,12 +29,12 @@ public class FilterCargoRepositoryImpl implements FilterCargoRepository {
         } else if (filter.loadDate() != null) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(cargo.get("loadDate"), filter.loadDate()));
         }
-        if (filter.countryLoad() != null && filter.countryLoad().countryName() != null && !filter.countryLoad().countryName().isBlank()) {
-            String countryNameLowerCase = filter.countryLoad().countryName().toLowerCase();
+        if (filter.countryLoad() != null && filter.countryLoad().name() != null && !filter.countryLoad().name().isBlank()) {
+            String countryNameLowerCase = filter.countryLoad().name().toLowerCase();
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(cargo.get("countryLoad").get("name")), "%" + countryNameLowerCase + "%"));
         }
-        if (filter.countryUnload() != null && filter.countryUnload().countryName() != null && !filter.countryUnload().countryName().isBlank()) {
-            String countryNameLowerCase = filter.countryUnload().countryName().toLowerCase();
+        if (filter.countryUnload() != null && filter.countryUnload().name() != null && !filter.countryUnload().name().isBlank()) {
+            String countryNameLowerCase = filter.countryUnload().name().toLowerCase();
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(cargo.get("countryUnload").get("name")), "%" + countryNameLowerCase + "%"));
         }
         if (filter.kindOfTransport() != null && filter.kindOfTransport().name() != null && !filter.kindOfTransport().name().isBlank()) {
