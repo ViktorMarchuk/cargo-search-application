@@ -62,6 +62,9 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
         if (object.getPrice() != null && cargo != null) {
             cargo.setPrice(object.getPrice());
         }
+        if (object.getContact() !=null && cargo !=null){
+            cargo.setContact(object.getContact());
+        }
     }
 
     private KindOfTransport getTransport(Integer transportId) {

@@ -31,21 +31,6 @@ public class CargoController {
     private final CityService cityService;
     private final KindOfTransportService kindOfTransportService;
 
-//    @GetMapping
-//    public String findAll(Model model,
-//                          @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
-//                          @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
-//                          @RequestParam(value = "countryLoad", required = false) String countryLoadName,
-//                          @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
-//                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName) {
-//        CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
-//        CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
-//        KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
-//        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
-//        model.addAttribute("cargo", cargoService.findAllByFilter(filter));
-//
-//        return "cargo_all";
-//    }
 @GetMapping
 public String findAll(Model model,
                       @RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
@@ -59,11 +44,7 @@ public String findAll(Model model,
     CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
     KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
     CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
-
-    // Получаем страницу грузов с примененными фильтрами и пагинацией
     Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
-
-    // Передаем в модель данные о текущей странице
     model.addAttribute("currentPage", pageNo);
     model.addAttribute("totalPages", cargoPage.getTotalPages());
     model.addAttribute("totalItems", cargoPage.getTotalElements());
@@ -152,15 +133,4 @@ public String findAll(Model model,
         }
         return "redirect:/cargo";
     }
-
-//    @GetMapping("/page/{pageNo}")
-//    public String findPage(@PathVariable("pageNo") int pageNo, Model model, CargoFilter filter) {
-//        int pageSize = 10;
-//        Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
-//        List<Cargo> cargoList = cargoPage.getContent();
-//        model.addAttribute("currentPage", pageNo);
-//        model.addAttribute("totalPages", cargoPage.getTotalPages());
-//        model.addAttribute("totalItems", cargoPage.getTotalElements());
-//        return "cargo_all";
-//    }
 }

@@ -173,6 +173,7 @@
             <th>Kind of transport</th>
             <th>Description of cargo</th>
             <th>Freight rate</th>
+            <th>Contact</th>
         </tr>
         </thead>
         <tbody>
@@ -188,6 +189,7 @@
                 <td th:text="${loading.kindOfTransport != null ? loading.kindOfTransport.name : ''}">Transport</td>
                 <td th:text="${loading.nameOfLoad}">Name of cargo</td>
                 <td th:text="${loading.price}">Price</td>
+                <td th:text="${loading.contact}"></td>
             </tr>
         </th:block>
         </tbody>

@@ -144,9 +144,12 @@
         <input id="nameOfLoad" type="text" name="nameOfLoad" th:value="${cargo.nameOfLoad}">
     </label>
     <div class="error-message" th:if="${#fields.hasErrors('cargo.nameOfLoad')}" th:errors="*{cargo.nameOfLoad}"></div>
-
     <label for="price">Freight rate:
         <input id="price" type="number" name="price" th:value="${cargo.price}">
+    </label>
+    <div class="error-message" th:if="${#fields.hasErrors('cargo.contact')}" th:errors="*{cargo.contact}"></div>
+    <label for="contact">Contact:
+        <input id="contact" type="text" name="contact" th:value="${cargo.contact}">
     </label>
     <button type="submit">Update loading</button>
 </form>

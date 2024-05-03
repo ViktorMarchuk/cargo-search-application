@@ -51,7 +51,8 @@ public class CargoReadMapper implements Mapper<Cargo, CargoReadDto> {
                 cityUnload,
                 transport,
                 object.getNameOfLoad(),
-                price
+                price,
+                object.getContact()
         );
     }
 }
