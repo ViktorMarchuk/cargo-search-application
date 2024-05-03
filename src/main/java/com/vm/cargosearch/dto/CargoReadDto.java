@@ -4,16 +4,15 @@ import lombok.Value;
 
 import java.time.LocalDate;
 
-@Value
-public class CargoReadDto {
-    private Long id;
-    private LocalDate loadDate;
-    private CountryReadDto countryLoad;
-    private CityReadDto cityLoad;
-    private CountryReadDto countryUnload;
-    private CityReadDto cityUnload;
-    private KindOfTransportReadDto kindOfTransport;
-    private String nameOfLoad;
-    private int price;
 
+public record CargoReadDto(Long id,
+                           LocalDate loadDate,
+                           CountryReadDto countryLoad,
+                           CityReadDto cityLoad,
+                           CountryReadDto countryUnload,
+                           CityReadDto cityUnload,
+                           KindOfTransportReadDto kindOfTransport,
+                           String nameOfLoad,
+                           int price,
+                           String contact) {
 }

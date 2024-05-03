@@ -41,4 +41,7 @@ public class CargoCreateEditDto {
     String nameOfLoad;
 
     Integer price;
+
+    @NotBlank(message = "Fill contact")
+    String contact;
 }

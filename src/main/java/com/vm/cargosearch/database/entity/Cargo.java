@@ -48,4 +48,7 @@ public class Cargo implements BaseEntity<Long> {
 
     @Column(name = "price")
     private Integer price;
+
+    @Column(name = "contact")
+    private String contact;
 }

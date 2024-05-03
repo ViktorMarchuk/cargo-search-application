@@ -1,1 +1,1 @@
-Simple application for input and searching cargos.
+Simple application for input, update, delete  and searching cargo.

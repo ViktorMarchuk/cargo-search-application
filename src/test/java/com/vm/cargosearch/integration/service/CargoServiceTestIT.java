@@ -4,13 +4,10 @@ import com.vm.cargosearch.annotation.IT;
 import com.vm.cargosearch.database.entity.City;
 import com.vm.cargosearch.database.entity.Country;
 import com.vm.cargosearch.database.entity.KindOfTransport;
-import com.vm.cargosearch.dto.CargoCreateEditDto;
-import com.vm.cargosearch.dto.CargoReadDto;
 import com.vm.cargosearch.service.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +28,7 @@ public class CargoServiceTestIT {
     void findAllTest() {
         var cargo = cargoService.findAll();
         List<Long> actualResult = cargo.stream()
-                .map(c -> c.getId())
+                .map(c -> c.id())
                 .collect(Collectors.toList());
 
         assertThat(actualResult).hasSize(5);
@@ -41,7 +38,7 @@ public class CargoServiceTestIT {
     void findByIdTest() {
         var cargo = cargoService.findById(CARGO_ID);
         Optional<Integer> actualPrice = cargo.stream()
-                .map(e -> e.getPrice())
+                .map(e -> e.price())
                 .findFirst();
 
         assertThat(actualPrice.get()).isEqualTo(EXPECTED_PRICE);
