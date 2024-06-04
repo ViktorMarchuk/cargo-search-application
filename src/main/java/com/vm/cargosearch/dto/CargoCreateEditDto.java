@@ -1,6 +1,7 @@
 package com.vm.cargosearch.dto;
 
 import com.vm.cargosearch.database.entity.City;
+import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.database.entity.Country;
 import com.vm.cargosearch.database.entity.KindOfTransport;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -42,6 +43,6 @@ public class CargoCreateEditDto {
 
     Integer price;
 
-    @NotBlank(message = "Fill contact")
-    String contact;
+    @NotNull(message = "Fill contact")
+    Contact contact;
 }

@@ -2,6 +2,7 @@ package com.vm.cargosearch.controllers;
 
 import com.vm.cargosearch.database.entity.Cargo;
 import com.vm.cargosearch.dto.*;
+import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.service.CargoService;
 import com.vm.cargosearch.service.CityService;
 import com.vm.cargosearch.service.CountryService;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargo")
@@ -31,28 +33,27 @@ public class CargoController {
     private final CityService cityService;
     private final KindOfTransportService kindOfTransportService;
 
-@GetMapping
-public String findAll(Model model,
-                      @RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
-                      @RequestParam(value = "pageSize", defaultValue = "17") int pageSize,
-                      @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
-                      @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
-                      @RequestParam(value = "countryLoad", required = false) String countryLoadName,
-                      @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
-                      @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName) {
-    CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
-    CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
-    KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
-    CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
-    Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
-    model.addAttribute("currentPage", pageNo);
-    model.addAttribute("totalPages", cargoPage.getTotalPages());
-    model.addAttribute("totalItems", cargoPage.getTotalElements());
-    model.addAttribute("cargo", cargoPage.getContent());
+    @GetMapping
+    public String findAll(Model model,
+                          @RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
+                          @RequestParam(value = "pageSize", defaultValue = "17") int pageSize,
+                          @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
+                          @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
+                          @RequestParam(value = "countryLoad", required = false) String countryLoadName,
+                          @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
+                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName) {
+        CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
+        CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
+        KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
+        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
+        Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", cargoPage.getTotalPages());
+        model.addAttribute("totalItems", cargoPage.getTotalElements());
+        model.addAttribute("cargo", cargoPage.getContent());
 
-    return "cargo_all";
-}
-
+        return "cargo_all";
+    }
 
 
     @GetMapping("/{id}")
@@ -125,6 +126,19 @@ public String findAll(Model model,
         cargoService.update(id, cargo);
         return "redirect:/cargo";
     }
+
+//    @GetMapping("/autocomplete")
+//    @ResponseBody
+//    public List<String> autocomplete(@RequestParam("keyword") String keyword) {
+//        return countryService.findByCountryNameFilter(keyword);
+//    }
+//
+//    @GetMapping("/autocompleteCity")
+//    @ResponseBody
+//    public List<String> autocompleteCity(@RequestParam("keyword") String keyword) {
+//        return cityService.findByCityName(keyword);
+//    }
+
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {

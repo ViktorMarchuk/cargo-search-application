@@ -129,11 +129,12 @@
             font-size: 17px;
             font-weight: bold;
         }
-       .datetime-container{
-           position: absolute;
-           bottom: 850px;
-           left: 15px;
-       }
+
+        .datetime-container {
+            position: absolute;
+            bottom: 850px;
+            left: 15px;
+        }
     </style>
 </head>
 <body>
@@ -172,7 +173,7 @@
             <th>Unloading city</th>
             <th>Kind of transport</th>
             <th>Description of cargo</th>
-            <th>Freight rate</th>
+            <th>Freight rate(Euro)</th>
             <th>Contact</th>
         </tr>
         </thead>
@@ -189,7 +190,19 @@
                 <td th:text="${loading.kindOfTransport != null ? loading.kindOfTransport.name : ''}">Transport</td>
                 <td th:text="${loading.nameOfLoad}">Name of cargo</td>
                 <td th:text="${loading.price}">Price</td>
-                <td th:text="${loading.contact}"></td>
+                <!--                <td th:utext="${'Company: ' + loading.getContact().getCompanyName() + '<br>' + 'Contact name:' + loading.getContact().getContactName()}"></td>-->
+                <!--                <td th:if="${loading.contact != null}" th:utext="${'Company: ' + loading.contact.companyName + '<br>' + 'Contact name:' + loading.contact.contactName}"></td>-->
+                <td th:if="${loading.contact != null}">
+                    <div>
+                        <span>Company: <span th:text="${loading.contact.companyName}"></span></span><br>
+                        <span>Contact name:
+            <a th:href="@{'/cargo/' + ${loading.contact.contactName}}"
+               th:text="${loading.contact.contactName}"></a>
+        </span>
+                    </div>
+                </td>
+                <!--                <td th:text="${loading.getContact().getTelephone()}"></td>-->
+                <!--                <td th:text="${loading.getContact().getEmail()}"></td>-->
             </tr>
         </th:block>
         </tbody>
@@ -231,6 +244,7 @@
         document.getElementById('currentDate').textContent = formattedDate; // Обновляем элемент на странице
         document.getElementById('currentDateTime').textContent = formattedTime; // Обновляем элемент на странице
     }
+
     setInterval(updateDateTime, 1000);
 </script>
 </body>

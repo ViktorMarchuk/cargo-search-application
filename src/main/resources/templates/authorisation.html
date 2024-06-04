@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorisation</title>
+</head>
+<body>
+<h2>Authorisation</h2>
+<form th:action="@{/authorisation}" method="post">
+    <label for="companyName">Company name:
+        <input id="companyName" type="text" name="companyName" th:field="*{newContact.companyName}">
+    </label>
+    <br><br>
+    <label for="address">Address:
+        <input id="address" type="text" name="address" th:field="*{newContact.address}">
+    </label>
+    <br><br>
+    <label for="email">Email:
+        <input id="email" type="email" name="email" th:field="*{newContact.email}">
+    </label>
+    <br><br>
+    <label for="telephone">Telephone:
+        <input id="telephone" type="text" name="telephone" th:field="*{newContact.telephone}">
+    </label>
+    <br><br>
+    <label for="contactName">Contact name:
+        <input id="contactName" type="text" name="contactName" th:field="*{newContact.contactName}">
+    </label>
+    <br><br>
+    <label for="password">Password:
+        <input id="password" type="password" name="password" th:field="*{newContact.password}">
+    </label>
+    <br><br>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>

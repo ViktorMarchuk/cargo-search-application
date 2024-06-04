@@ -22,6 +22,7 @@ public class CargoReadMapper implements Mapper<Cargo, CargoReadDto> {
 
     @Override
     public CargoReadDto map(Cargo object) {
+
         CountryReadDto countryLoad = Optional.ofNullable(object.getCountryLoad())
                 .map(countryReadMapper::map)
                 .orElse(null);

@@ -1,12 +1,13 @@
 package com.vm.cargosearch.service;
 
 import com.vm.cargosearch.database.entity.Cargo;
-import com.vm.cargosearch.database.repository.CargoRepository;
+import com.vm.cargosearch.database.repository.*;
 import com.vm.cargosearch.dto.CargoCreateEditDto;
 import com.vm.cargosearch.dto.CargoFilter;
 import com.vm.cargosearch.dto.CargoReadDto;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.mapper.CargoReadMapper;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -57,13 +58,15 @@ public class CargoService {
                 .orElseThrow();
     }
 
-    @Transactional
+        @Transactional
     public Optional<CargoReadDto> update(Long id, CargoCreateEditDto cargo) {
+        System.out.println("Updating cargo with ID: " + id);
         return cargoRepository.findById(id)
                 .map(entity -> cargoCreateEditMapper.map(cargo, entity))
                 .map(cargoRepository::saveAndFlush)
                 .map(cargoReadMapper::map);
     }
+
 
     @Transactional
     public boolean delete(Long id) {

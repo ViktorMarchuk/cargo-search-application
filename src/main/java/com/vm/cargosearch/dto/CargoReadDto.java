@@ -1,5 +1,6 @@
 package com.vm.cargosearch.dto;
 
+import com.vm.cargosearch.database.entity.Contact;
 import lombok.Value;
 
 import java.time.LocalDate;
@@ -14,5 +15,5 @@ public record CargoReadDto(Long id,
                            KindOfTransportReadDto kindOfTransport,
                            String nameOfLoad,
                            int price,
-                           String contact) {
+                           Contact contact) {
 }
