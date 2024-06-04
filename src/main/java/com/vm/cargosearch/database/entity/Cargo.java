@@ -23,19 +23,19 @@ public class Cargo implements BaseEntity<Long> {
     @Column(name = "loading_date")
     private LocalDate loadDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "country_load_id", nullable = false)
     private Country countryLoad;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "city_name_load_id", nullable = false)
     private City cityLoad;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "country_unload_id", nullable = false)
     private Country countryUnload;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "city_name_unload_id", nullable = false)
     private City cityUnload;
 
@@ -49,6 +49,7 @@ public class Cargo implements BaseEntity<Long> {
     @Column(name = "price")
     private Integer price;
 
-    @Column(name = "contact")
-    private String contact;
+    @ManyToOne
+    @JoinColumn(name = "contact_id", nullable = false)
+    private Contact contact;
 }

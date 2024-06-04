@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,5 +24,9 @@ public class KindOfTransportService {
                 .stream()
                 .map(kindOfTransportReadMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<KindOfTransport> findById(Integer id) {
+        return kindOfTransportRepository.findById(id);
     }
 }

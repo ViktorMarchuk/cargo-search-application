@@ -20,8 +20,4 @@ public class City implements BaseEntity<Integer> {
 
     @Column(name = "name_city", unique = true, nullable = false)
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
 }

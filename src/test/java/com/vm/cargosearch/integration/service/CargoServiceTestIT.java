@@ -2,12 +2,22 @@ package com.vm.cargosearch.integration.service;
 
 import com.vm.cargosearch.annotation.IT;
 import com.vm.cargosearch.database.entity.City;
+import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.database.entity.Country;
 import com.vm.cargosearch.database.entity.KindOfTransport;
+import com.vm.cargosearch.database.repository.CityRepository;
+import com.vm.cargosearch.database.repository.ContactRepository;
+import com.vm.cargosearch.database.repository.CountryRepository;
+import com.vm.cargosearch.database.repository.KindOfTransportRepository;
+import com.vm.cargosearch.dto.CargoCreateEditDto;
+import com.vm.cargosearch.dto.CargoReadDto;
 import com.vm.cargosearch.service.CargoService;
+import jakarta.persistence.Column;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.Commit;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +30,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RequiredArgsConstructor
 public class CargoServiceTestIT {
     private final CargoService cargoService;
-    private final Long CARGO_ID = 1L;
+    private final ContactRepository contactRepository;
+    private final CountryRepository countryRepository;
+    private final CityRepository cityRepository;
+    private final KindOfTransportRepository kindOfTransportRepository;
+    private final Long CARGO_ID = 3L;
     private final int EXPECTED_PRICE = 4800;
 
 
@@ -47,11 +61,11 @@ public class CargoServiceTestIT {
 
     @Test
     void createTest() {
-        Country testCountryLoad = new Country(2, "LT");
-        City testCityLoad = new City(4, "Vilnius", testCountryLoad);
-        Country testCountryUnload = new Country(6, "CZ");
-        City testCityUnload = new City(15, "Praga", testCountryUnload);
-        KindOfTransport transport = new KindOfTransport(1, "Tilt");
+//        Country testCountryLoad = new Country(2, "LT");
+//        City testCityLoad = new City(4, "Vilnius", testCountryLoad);
+//        Country testCountryUnload = new Country(6, "CZ");
+//        City testCityUnload = new City(15, "Praga", testCountryUnload);
+//        KindOfTransport transport = new KindOfTransport(1, "Tilt");
 
 //        CargoCreateEditDto expectedResult = new CargoCreateEditDto(
 //                LocalDate.now(),
@@ -73,32 +87,38 @@ public class CargoServiceTestIT {
     }
 
     @Test
+    @Commit
     void updateTest() {
-//        Country testCountryLoad = new Country(2, "LT");
-//        City testCityLoad = new City(4, "Vilnius", testCountryLoad);
-//        Country testCountryUnload = new Country(6, "CZ");
-//        City testCityUnload = new City(15, "Praga", testCountryUnload);
-//        KindOfTransport transport = new KindOfTransport(1, "Tilt");
-//
-//        CargoCreateEditDto expectedResult = new CargoCreateEditDto(
-//                LocalDate.now(),
-//                testCountryLoad,
-//                testCityLoad,
-//                testCountryUnload,
-//                testCityUnload,
-//                transport,
-//                "ADR 8 kl",
-//                4800);
-//        Optional<CargoReadDto> result = cargoService.update(CARGO_ID, expectedResult);
-//
+        Country testCountryLoad = countryRepository.findCountryById(8).orElseThrow(()->new IllegalArgumentException("Country not found"));
+        City testCityLoad = cityRepository.findById(19).orElseThrow(()->new IllegalArgumentException("City not found"));
+        Country testCountryUnload = countryRepository.findCountryById(8).orElseThrow(()->new IllegalArgumentException("Country not found"));
+        City testCityUnload = cityRepository.findById(19).orElseThrow(()->new IllegalArgumentException("City not found"));
+        KindOfTransport transport = kindOfTransportRepository.findById(2).orElseThrow(()->new IllegalArgumentException("Transport not found"));
+        Contact existingContact = contactRepository.findById(1).orElseThrow(() -> new IllegalArgumentException("Contact not found"));
+
+        CargoCreateEditDto expectedResult = new CargoCreateEditDto(
+                CARGO_ID,
+                LocalDate.now(),
+                testCountryLoad,
+                testCityLoad,
+                testCountryUnload,
+                testCityUnload,
+                transport,
+                "ADR 8 kl",
+                4800,
+                existingContact);
+        Optional<CargoReadDto> result = cargoService.update(CARGO_ID, expectedResult);
+        System.out.println(result);
+
 //        List<CargoReadDto> actualResult = result.stream().collect(Collectors.toList());
-//        Optional<String> countryLoadActual = actualResult.stream().map(c -> c.getCountryLoad().name()).findFirst();
-//        Optional<String> cityLoadActual = actualResult.stream().map(c -> c.getCityLoad().name()).findFirst();
-//        Optional<String> countryUnloadActual = actualResult.stream().map(c -> c.getCountryUnload().name()).findFirst();
-//        Optional<String> cityUnloadActual = actualResult.stream().map(c -> c.getCityUnload().name()).findFirst();
-//        Optional<String> transportActual = actualResult.stream().map(c -> c.getKindOfTransport().name()).findFirst();
-//        Optional<String> loadNameActual = actualResult.stream().map(c -> c.getNameOfLoad()).findFirst();
-//        Optional<Integer> actualPrice = actualResult.stream().map(c -> c.getPrice()).findFirst();
+//        Optional<String> countryLoadActual = actualResult.stream().map(c -> c.countryLoad().name()).findFirst();
+//        Optional<String> cityLoadActual = actualResult.stream().map(c -> c.cityLoad().name()).findFirst();
+//        Optional<String> countryUnloadActual = actualResult.stream().map(c -> c.countryUnload().name()).findFirst();
+//        Optional<String> cityUnloadActual = actualResult.stream().map(c -> c.cityUnload().name()).findFirst();
+//        Optional<String> transportActual = actualResult.stream().map(c -> c.kindOfTransport().name()).findFirst();
+//        Optional<String> loadNameActual = actualResult.stream().map(c -> c.nameOfLoad()).findFirst();
+//        Optional<Integer> actualPrice = actualResult.stream().map(c -> c.price()).findFirst();
+//
 //
 //        assertTrue(result.isPresent());
 //        assertEquals(expectedResult.getCountryLoad().getName(), countryLoadActual.get());

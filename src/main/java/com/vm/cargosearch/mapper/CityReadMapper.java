@@ -12,6 +12,6 @@ public class CityReadMapper implements Mapper<City, CityReadDto> {
 
     @Override
     public CityReadDto map(City object) {
-        return new CityReadDto(object.getId(), object.getName(), countryReadMapper.map(object.getCountry()));
+        return new CityReadDto(object.getId(), object.getName());
     }
 }

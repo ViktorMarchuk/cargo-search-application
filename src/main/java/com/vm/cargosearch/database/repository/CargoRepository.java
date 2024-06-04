@@ -1,6 +1,7 @@
 package com.vm.cargosearch.database.repository;
 
 import com.vm.cargosearch.database.entity.Cargo;
+import com.vm.cargosearch.dto.CargoReadDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

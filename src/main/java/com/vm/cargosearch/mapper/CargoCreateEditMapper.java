@@ -1,15 +1,12 @@
 package com.vm.cargosearch.mapper;
 
-import com.vm.cargosearch.database.entity.Cargo;
-import com.vm.cargosearch.database.entity.City;
-import com.vm.cargosearch.database.entity.Country;
-import com.vm.cargosearch.database.entity.KindOfTransport;
+import com.vm.cargosearch.database.entity.*;
 import com.vm.cargosearch.database.repository.CityRepository;
+import com.vm.cargosearch.database.repository.ContactRepository;
 import com.vm.cargosearch.database.repository.CountryRepository;
 import com.vm.cargosearch.database.repository.KindOfTransportRepository;
 import com.vm.cargosearch.dto.CargoCreateEditDto;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -20,6 +17,7 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
     private final KindOfTransportRepository transportRepository;
+    private final ContactRepository contactRepository;
 
     @Override
     public Cargo map(CargoCreateEditDto fromObject, Cargo toObject) {
@@ -47,7 +45,7 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
         if (object.getCityLoad() != null) {
             cargo.setCityLoad(getCity(object.getCityLoad().getId()));
         }
-        if (object.getCountryLoad() != null) {
+        if (object.getCountryUnload() != null) {
             cargo.setCountryUnload(getCountry(object.getCountryUnload().getId()));
         }
         if (object.getCityUnload() != null) {
@@ -59,11 +57,11 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
         if (object.getNameOfLoad() != null) {
             cargo.setNameOfLoad(object.getNameOfLoad());
         }
-        if (object.getPrice() != null && cargo != null) {
+        if (object.getPrice() != null) {
             cargo.setPrice(object.getPrice());
         }
-        if (object.getContact() !=null && cargo !=null){
-            cargo.setContact(object.getContact());
+        if (object.getContact() != null) {
+            cargo.setContact(getContact(object.getContact().getId()));
         }
     }
 
@@ -84,5 +82,10 @@ public class CargoCreateEditMapper implements Mapper<CargoCreateEditDto, Cargo> 
                 .flatMap(countryRepository::findById)
                 .orElse(null);
     }
-}
 
+    private Contact getContact(Integer contactId) {
+        return Optional.ofNullable(contactId)
+                .flatMap(contactRepository::findById)
+                .orElse(null);
+    }
+}
