@@ -14,24 +14,29 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage() {
+
         return "/login";
     }
 
     @GetMapping("/authorisation")
     public String authorisationPage(Model model) {
         model.addAttribute("newContact", new ContactCreateDto());
+
         return "authorisation";
     }
 
     @PostMapping("/authorisation")
     public String create(@ModelAttribute("newContact") ContactCreateDto contact) {
         contactService.create(contact);
+
         return "redirect:/login";
     }
 
-    @GetMapping("/{contactName}")
-    public String findByContactName(@PathVariable("contactName") String contactName) {
-        return "company";
+    @GetMapping("/contact_name/{id}")
+    public String findByContactName(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("contact", contactService.findContactById(id));
+
+        return "company_details";
     }
 }
 
