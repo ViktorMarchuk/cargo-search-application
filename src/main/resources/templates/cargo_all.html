@@ -103,7 +103,6 @@
             white-space: pre-line;
         }
 
-        /* Позиционирование пагинации */
         .pagination-container {
             position: fixed;
             bottom: 110px;
@@ -115,9 +114,9 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%; /* Ширина линии, чтобы она протягивалась по всей ширине страницы */
-            height: 2px; /* Высота линии */
-            background-color: black; /* Цвет линии */
+            width: 100%;
+            height: 2px;
+            background-color: black;
         }
 
         #currentDateTime {
@@ -192,11 +191,11 @@
                 <td th:text="${loading.price}">Price</td>
                 <!--                <td th:utext="${'Company: ' + loading.getContact().getCompanyName() + '<br>' + 'Contact name:' + loading.getContact().getContactName()}"></td>-->
                 <!--                <td th:if="${loading.contact != null}" th:utext="${'Company: ' + loading.contact.companyName + '<br>' + 'Contact name:' + loading.contact.contactName}"></td>-->
-                <td th:if="${loading.contact != null}">
+                <td th:if="${loading.contact.id != null}">
                     <div>
-                        <span>Company: <span th:text="${loading.contact.companyName}"></span></span><br>
+                        <span>Company: <span th:text="${loading.contact.id}"></span></span><br>
                         <span>Contact name:
-            <a th:href="@{'/cargo/' + ${loading.contact.contactName}}"
+            <a th:href="@{'/contact_name/' + ${loading.contact.id}}"
                th:text="${loading.contact.contactName}"></a>
         </span>
                     </div>
@@ -244,7 +243,6 @@
         document.getElementById('currentDate').textContent = formattedDate; // Обновляем элемент на странице
         document.getElementById('currentDateTime').textContent = formattedTime; // Обновляем элемент на странице
     }
-
     setInterval(updateDateTime, 1000);
 </script>
 </body>

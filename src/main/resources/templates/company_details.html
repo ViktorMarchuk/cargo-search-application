@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company details</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-bottom-width: medium;
+        }
+        th, td {
+            padding: 8px;
+            border: 4px solid #666666;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h2>Company data:</h2>
+<div th:each="c : ${contact}" th:if="${c != null}">
+    <table>
+        <tbody>
+        <tr>
+            <th>Id:</th>
+            <td th:text="${c.id}"></td>
+        </tr>
+        <tr>
+            <th>Company name:</th>
+            <td th:text="${c.companyName}"></td>
+        </tr>
+        <tr>
+            <th>Address:</th>
+            <td th:text="${c.address}"></td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td th:text="${c.email}"></td>
+        </tr>
+        <tr>
+            <th>Telephone:</th>
+            <td th:text="${c.telephone}"></td>
+        </tr>
+        <tr>
+            <th>Contact name:</th>
+            <td th:text="${c.contactName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form action="/cargo">
+    <button type="submit">To main page</button>
+</form>
+</body>
+</html>
