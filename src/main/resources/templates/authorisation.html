@@ -1,37 +1,138 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Authorisation</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Authorisation</h2>-->
+<!--<form th:action="@{/authorisation}" method="post">-->
+<!--    <label for="companyName">Company name:-->
+<!--        <input id="companyName" type="text" name="companyName" th:field="*{newContact.companyName}">-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <label for="address">Address:-->
+<!--        <input id="address" type="text" name="address" th:field="*{newContact.address}">-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <label for="email">Email:-->
+<!--        <input id="email" type="email" name="email" th:field="*{newContact.email}">-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <label for="telephone">Telephone:-->
+<!--        <input id="telephone" type="text" name="telephone" th:field="*{newContact.telephone}">-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <label for="contactName">Contact name:-->
+<!--        <input id="contactName" type="text" name="contactName" th:field="*{newContact.contactName}">-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <label for="password">Password:-->
+<!--        <input id="password" type="password" name="password" th:field="*{newContact.password}">-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <button type="submit">Send</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Authorisation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFEBCD;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            margin-top: 20px;
+            text-align: center;
+            width: 80%; /* Увеличена ширина контейнера */
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            border: 5px solid #666666;
+            width: 70%; /* Увеличена ширина таблицы */
+        }
+        th, td {
+            padding: 12px; /* Увеличены отступы */
+            text-align: left;
+            border: 1px solid #ccc;
+            font-size: 16px; /* Увеличен размер шрифта */
+        }
+        th {
+            background-color: #f2f2f2;
+            width: 30%; /* Установлена ширина столбца заголовков */
+        }
+        td {
+            width: 70%; /* Установлена ширина столбца данных */
+        }
+        button {
+            background-color: green;
+            color: white;
+            padding: 15px 30px; /* Увеличен размер кнопки */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Увеличен отступ сверху */
+            font-size: 16px; /* Увеличен размер шрифта кнопки */
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 16px; /* Увеличен размер шрифта */
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
-<h2>Authorisation</h2>
-<form th:action="@{/authorisation}" method="post">
-    <label for="companyName">Company name:
-        <input id="companyName" type="text" name="companyName" th:field="*{newContact.companyName}">
-    </label>
-    <br><br>
-    <label for="address">Address:
-        <input id="address" type="text" name="address" th:field="*{newContact.address}">
-    </label>
-    <br><br>
-    <label for="email">Email:
-        <input id="email" type="email" name="email" th:field="*{newContact.email}">
-    </label>
-    <br><br>
-    <label for="telephone">Telephone:
-        <input id="telephone" type="text" name="telephone" th:field="*{newContact.telephone}">
-    </label>
-    <br><br>
-    <label for="contactName">Contact name:
-        <input id="contactName" type="text" name="contactName" th:field="*{newContact.contactName}">
-    </label>
-    <br><br>
-    <label for="password">Password:
-        <input id="password" type="password" name="password" th:field="*{newContact.password}">
-    </label>
-    <br><br>
-    <button type="submit">Send</button>
-</form>
+<div class="form-container">
+    <h2>Authorisation:</h2>
+    <form th:action="@{/authorisation}" method="post">
+        <table>
+            <tr>
+                <th><label for="companyName">Company name:</label></th>
+                <td><input id="companyName" type="text" name="companyName" th:field="*{newContact.companyName}"></td>
+            </tr>
+            <tr>
+                <th><label for="address">Address:</label></th>
+                <td><input id="address" type="text" name="address" th:field="*{newContact.address}"></td>
+            </tr>
+            <tr>
+                <th><label for="email">Email:</label></th>
+                <td><input id="email" type="email" name="email" th:field="*{newContact.email}"></td>
+            </tr>
+            <tr>
+                <th><label for="telephone">Telephone:</label></th>
+                <td><input id="telephone" type="text" name="telephone" th:field="*{newContact.telephone}"></td>
+            </tr>
+            <tr>
+                <th><label for="contactName">Contact name:</label></th>
+                <td><input id="contactName" type="text" name="contactName" th:field="*{newContact.contactName}"></td>
+            </tr>
+            <tr>
+                <th><label for="password">Password:</label></th>
+                <td><input id="password" type="password" name="password" th:field="*{newContact.password}"></td>
+            </tr>
+        </table>
+        <button type="submit">Send</button>
+    </form>
+</div>
 </body>
 </html>

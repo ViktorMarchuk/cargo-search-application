@@ -1,31 +1,107 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Login</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Login Page</h2>-->
+<!--<div style="color: red" th:if="${param.error}">-->
+<!--    Invalid username or password!-->
+<!--</div>-->
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <label for="username">Username:-->
+<!--        <input id="username" type="text" name="username" required>-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <label for="password">Password:-->
+<!--        <input id="password" type="password" name="password" required>-->
+<!--    </label>-->
+<!--    <br><br>-->
+<!--    <button type="submit">Login</button>-->
+<!--</form>-->
+<!--<br>-->
+<!--<form th:action="@{/authorisation}" method="get">-->
+<!--    <button type="submit">Authorisation</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFEBCD;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<h2>Login Page</h2>
-<div style="color: red" th:if="${param.error}">
-    Invalid username or password!
+<div class="form-container">
+    <h2>Login Page</h2>
+    <div th:if="${param.error}" class="error">
+        Invalid username or password!
+    </div>
+    <form th:action="@{/login}" method="post">
+        <table>
+            <tr>
+                <th><label for="username">Username:</label></th>
+                <td><input id="username" type="text" name="username" required></td>
+            </tr>
+            <tr>
+                <th><label for="password">Password:</label></th>
+                <td><input id="password" type="password" name="password" required></td>
+            </tr>
+        </table>
+        <button type="submit">Login</button>
+    </form>
+    <form th:action="@{/authorisation}" method="get">
+        <button type="submit">Authorisation</button>
+    </form>
 </div>
-<form th:action="@{/login}" method="post">
-    <label for="username">Username:
-        <input id="username" type="text" name="username" required>
-    </label>
-    <br><br>
-    <label for="password">Password:
-        <input id="password" type="password" name="password" required>
-    </label>
-    <br><br>
-    <button type="submit">Login</button>
-</form>
-<br>
-<form th:action="@{/authorisation}" method="get">
-    <button type="submit">Authorisation</button>
-</form>
 </body>
 </html>
-
-
-
