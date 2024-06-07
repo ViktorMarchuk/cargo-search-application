@@ -14,6 +14,5 @@ public record CargoReadDto(Long id,
                            CityReadDto cityUnload,
                            KindOfTransportReadDto kindOfTransport,
                            String nameOfLoad,
-                           int price,
-                           Contact contact) {
+                           int price) {
 }

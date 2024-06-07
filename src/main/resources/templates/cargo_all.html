@@ -42,9 +42,9 @@
             text-align: center;
             margin-bottom: 40px;
             margin-right: 350px;
-            border-bottom: 10px solid #dcd582;
+            border-bottom: 10px solid #6ea68a;
             margin-bottom: 18px;
-            border-top: 10px solid #dcd582;
+            border-top: 10px solid #6ea68a;
             width: 100%;
             letter-spacing: 5px;
         }
@@ -173,7 +173,7 @@
             <th>Kind of transport</th>
             <th>Description of cargo</th>
             <th>Freight rate(Euro)</th>
-            <th>Contact</th>
+            <th>Contact information</th>
         </tr>
         </thead>
         <tbody>
@@ -193,8 +193,8 @@
                 <!--                <td th:if="${loading.contact != null}" th:utext="${'Company: ' + loading.contact.companyName + '<br>' + 'Contact name:' + loading.contact.contactName}"></td>-->
                 <td th:if="${loading.contact.id != null}">
                     <div>
-                        <span>Company: <span th:text="${loading.contact.id}"></span></span><br>
-                        <span>Contact name:
+<!--                        <span>Company: <span th:text="${loading.contact.id}"></span></span><br>-->
+                        <span>The contact person :
             <a th:href="@{'/contact_name/' + ${loading.contact.id}}"
                th:text="${loading.contact.contactName}"></a>
         </span>
