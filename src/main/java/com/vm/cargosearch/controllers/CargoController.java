@@ -36,7 +36,7 @@ public class CargoController {
     @GetMapping
     public String findAll(Model model,
                           @RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
-                          @RequestParam(value = "pageSize", defaultValue = "17") int pageSize,
+                          @RequestParam(value = "pageSize", defaultValue = "9") int pageSize,
                           @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
                           @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
                           @RequestParam(value = "countryLoad", required = false) String countryLoadName,
@@ -112,7 +112,7 @@ public class CargoController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Long id, @ModelAttribute("cargo") @Validated CargoCreateEditDto cargo,
+    public String update(@PathVariable("id") Long id, @ModelAttribute("cargo") @Validated CargoUpdateDto cargo,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
                          Model model) {

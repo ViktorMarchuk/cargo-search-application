@@ -2,11 +2,11 @@ package com.vm.cargosearch.service;
 
 import com.vm.cargosearch.database.entity.Cargo;
 import com.vm.cargosearch.database.repository.*;
-import com.vm.cargosearch.dto.CargoCreateEditDto;
-import com.vm.cargosearch.dto.CargoFilter;
-import com.vm.cargosearch.dto.CargoReadDto;
+import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.mapper.CargoReadMapper;
+import com.vm.cargosearch.mapper.CargoUpdateMapper;
+import com.vm.cargosearch.mapper.CargoUpdateReadMapper;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +27,8 @@ public class CargoService {
     private final CargoRepository cargoRepository;
     private final CargoReadMapper cargoReadMapper;
     private final CargoCreateEditMapper cargoCreateEditMapper;
+    private final CargoUpdateMapper cargoUpdateMapper;
+    private final CargoUpdateReadMapper cargoUpdateReadMapper;
 
     public List<CargoReadDto> findAllByFilter(CargoFilter filter) {
         return cargoRepository.findAllByFilter(filter)
@@ -58,15 +60,22 @@ public class CargoService {
                 .orElseThrow();
     }
 
-        @Transactional
-    public Optional<CargoReadDto> update(Long id, CargoCreateEditDto cargo) {
+    //    @Transactional
+//    public Optional<CargoReadDto> update(Long id, CargoCreateEditDto cargo) {
+//        System.out.println("Updating cargo with ID: " + id);
+//        return cargoRepository.findById(id)
+//                .map(entity -> cargoCreateEditMapper.map(cargo, entity))
+//                .map(cargoRepository::saveAndFlush)
+//                .map(cargoReadMapper::map);
+//    }
+    @Transactional
+    public Optional<CargoUpdateReadDto> update(Long id, CargoUpdateDto cargo) {
         System.out.println("Updating cargo with ID: " + id);
         return cargoRepository.findById(id)
-                .map(entity -> cargoCreateEditMapper.map(cargo, entity))
+                .map(entity -> cargoUpdateMapper.map(cargo, entity))
                 .map(cargoRepository::saveAndFlush)
-                .map(cargoReadMapper::map);
+                .map(cargoUpdateReadMapper::map);
     }
-
 
     @Transactional
     public boolean delete(Long id) {
