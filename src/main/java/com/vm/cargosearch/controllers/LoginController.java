@@ -39,22 +39,3 @@ public class LoginController {
         return "company_details";
     }
 }
-
-
-//@Controller
-//@RequiredArgsConstructor
-//public class LoginController {
-//    private final ContactService contactService;
-//
-//    @GetMapping("/authorisation")
-//    public String authorisationPage(Model model) {
-//        model.addAttribute("newContact", new ContactCreateDto());
-//        return "authorisation";
-//    }
-//
-//    @PostMapping("/authorisation")
-//    public String create(@ModelAttribute("newContact") ContactCreateDto contact) {
-//        contactService.create(contact);
-//        return "redirect:/login";
-//    }
-//}

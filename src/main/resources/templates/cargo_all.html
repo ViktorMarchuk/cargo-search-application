@@ -189,19 +189,14 @@
                 <td th:text="${loading.kindOfTransport != null ? loading.kindOfTransport.name : ''}">Transport</td>
                 <td th:text="${loading.nameOfLoad}">Name of cargo</td>
                 <td th:text="${loading.price}">Price</td>
-                <!--                <td th:utext="${'Company: ' + loading.getContact().getCompanyName() + '<br>' + 'Contact name:' + loading.getContact().getContactName()}"></td>-->
-                <!--                <td th:if="${loading.contact != null}" th:utext="${'Company: ' + loading.contact.companyName + '<br>' + 'Contact name:' + loading.contact.contactName}"></td>-->
-                <td th:if="${loading.contact.id != null}">
-                    <div>
-<!--                        <span>Company: <span th:text="${loading.contact.id}"></span></span><br>-->
-                        <span>The contact person :
-            <a th:href="@{'/contact_name/' + ${loading.contact.id}}"
-               th:text="${loading.contact.contactName}"></a>
+                <td th:if="${loading.contact != null}">
+                    <div th:if="${loading.contact.id != null}">
+        <span>Контактное лицо :
+            <a th:href="@{'/contact_name/' + ${loading.contact.id}}" th:text="${loading.contact.contactName}"></a>
         </span>
                     </div>
                 </td>
-                <!--                <td th:text="${loading.getContact().getTelephone()}"></td>-->
-                <!--                <td th:text="${loading.getContact().getEmail()}"></td>-->
+
             </tr>
         </th:block>
         </tbody>
@@ -237,11 +232,11 @@
 </div>
 <script>
     function updateDateTime() {
-        var currentDate = new Date(); // Получаем текущую дату и время
-        var formattedDate = currentDate.toLocaleDateString(); // Форматируем дату
-        var formattedTime = currentDate.toLocaleTimeString(); // Форматируем время
-        document.getElementById('currentDate').textContent = formattedDate; // Обновляем элемент на странице
-        document.getElementById('currentDateTime').textContent = formattedTime; // Обновляем элемент на странице
+        var currentDate = new Date();
+        var formattedDate = currentDate.toLocaleDateString();
+        var formattedTime = currentDate.toLocaleTimeString();
+        document.getElementById('currentDate').textContent = formattedDate;
+        document.getElementById('currentDateTime').textContent = formattedTime;
     }
     setInterval(updateDateTime, 1000);
 </script>

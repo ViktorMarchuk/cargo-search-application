@@ -1,6 +1,7 @@
 package com.vm.cargosearch.controllers;
 
 import com.vm.cargosearch.database.entity.Cargo;
+import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.service.CargoService;
