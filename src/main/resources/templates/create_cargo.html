@@ -81,7 +81,6 @@
     <div class="error-message" th:if="${#fields.hasErrors('newCargo.loadDate')}" th:errors="*{newCargo.loadDate}">Error date</div>
     <input type="hidden" name="newCargo" th:value="${newCargo}" />
     <input id="loadDate" type="date" name="loadDate" th:field="${newCargo.loadDate}"/>
-
     <label>Loading country:</label>
     <div class="error-message" th:if="${#fields.hasErrors('newCargo.countryLoad')}" th:errors="*{newCargo.countryLoad}">Error country</div>
     <select id="countryLoad" name="countryLoad">
@@ -92,7 +91,6 @@
                 th:text="${countryLoading.name}">Loading country
         </option>
     </select>
-
     <label>Loading city:</label>
     <div class="error-message" th:if="${#fields.hasErrors('newCargo.cityLoad')}" th:errors="*{newCargo.cityLoad}">Error city</div>
     <select id="cityLoad" name="cityLoad">

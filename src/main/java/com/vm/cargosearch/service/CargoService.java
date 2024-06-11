@@ -59,18 +59,8 @@ public class CargoService {
                 .map(cargoReadMapper::map)
                 .orElseThrow();
     }
-
-    //    @Transactional
-//    public Optional<CargoReadDto> update(Long id, CargoCreateEditDto cargo) {
-//        System.out.println("Updating cargo with ID: " + id);
-//        return cargoRepository.findById(id)
-//                .map(entity -> cargoCreateEditMapper.map(cargo, entity))
-//                .map(cargoRepository::saveAndFlush)
-//                .map(cargoReadMapper::map);
-//    }
     @Transactional
     public Optional<CargoUpdateReadDto> update(Long id, CargoUpdateDto cargo) {
-        System.out.println("Updating cargo with ID: " + id);
         return cargoRepository.findById(id)
                 .map(entity -> cargoUpdateMapper.map(cargo, entity))
                 .map(cargoRepository::saveAndFlush)
