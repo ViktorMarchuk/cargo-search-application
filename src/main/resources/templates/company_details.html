@@ -6,27 +6,35 @@
     <style>
         body {
             background-color: #FFEBCD;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
         }
         table {
             width: 50%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-            background-color: white; /* Белый фон для таблицы */
-            table-layout: fixed; /* Фиксированная компоновка таблицы */
+            margin: 0 auto 50px auto;
+            background-color: white;
+            table-layout: fixed;
         }
         th, td {
             padding: 8px;
-            border: 4px solid #666666;
+            border: 2px solid #666666;
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
         }
         .left-column {
-            width: 20%; /* Ширина левой колонки - 1/3 */
+            width: 30%;
         }
         .right-column {
-            width: 80%; /* Ширина правой колонки - 2/3 */
+            width: 70%;
         }
         button {
             background-color: green;
@@ -35,6 +43,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            display: block;
+            margin: 0 auto;
         }
         button:hover {
             background-color: darkgreen;
@@ -42,39 +52,41 @@
     </style>
 </head>
 <body>
-<h2>Information about the company and contact person:</h2>
-<div th:each="c : ${contact}" th:if="${c != null}">
-    <table>
-        <tbody>
-        <tr>
-            <th class="left-column">Id:</th>
-            <td class="right-column" th:text="${c.id}"></td>
-        </tr>
-        <tr>
-            <th class="left-column">Company name:</th>
-            <td class="right-column" th:text="${c.companyName}"></td>
-        </tr>
-        <tr>
-            <th class="left-column">Address:</th>
-            <td class="right-column" th:text="${c.address}"></td>
-        </tr>
-        <tr>
-            <th class="left-column">Email:</th>
-            <td class="right-column" th:text="${c.email}"></td>
-        </tr>
-        <tr>
-            <th class="left-column">Telephone:</th>
-            <td class="right-column" th:text="${c.telephone}"></td>
-        </tr>
-        <tr>
-            <th class="left-column">Contact name:</th>
-            <td class="right-column" th:text="${c.contactName}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <h2>Information about the company and contact person:</h2>
+    <div th:each="c : ${contact}" th:if="${c != null}">
+        <table>
+            <tbody>
+            <tr>
+                <th class="left-column">Id:</th>
+                <td class="right-column" th:text="${c.id}"></td>
+            </tr>
+            <tr>
+                <th class="left-column">Company name:</th>
+                <td class="right-column" th:text="${c.companyName}"></td>
+            </tr>
+            <tr>
+                <th class="left-column">Address:</th>
+                <td class="right-column" th:text="${c.address}"></td>
+            </tr>
+            <tr>
+                <th class="left-column">Email:</th>
+                <td class="right-column" th:text="${c.email}"></td>
+            </tr>
+            <tr>
+                <th class="left-column">Telephone:</th>
+                <td class="right-column" th:text="${c.telephone}"></td>
+            </tr>
+            <tr>
+                <th class="left-column">Contact name:</th>
+                <td class="right-column" th:text="${c.contactName}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <form action="/cargo">
+        <button type="submit">To main page</button>
+    </form>
 </div>
-<form action="/cargo">
-    <button type="submit">To main page</button>
-</form>
 </body>
 </html>

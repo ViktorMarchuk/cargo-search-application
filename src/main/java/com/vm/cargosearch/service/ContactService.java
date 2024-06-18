@@ -55,4 +55,12 @@ public class ContactService implements UserDetailsService {
                 .map(contactDetailsMapper::map)
                 .toList();
     }
+
+    public Integer getIdByName(String name) {
+        return contactRepository.findByContactName(name)
+                .stream()
+                .map(contact -> contact.getId())
+                .findFirst()
+                .orElseThrow();
+    }
 }
