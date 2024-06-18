@@ -4,10 +4,7 @@ import com.vm.cargosearch.database.entity.Cargo;
 import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
-import com.vm.cargosearch.service.CargoService;
-import com.vm.cargosearch.service.CityService;
-import com.vm.cargosearch.service.CountryService;
-import com.vm.cargosearch.service.KindOfTransportService;
+import com.vm.cargosearch.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +31,7 @@ public class CargoController {
     private final CountryService countryService;
     private final CityService cityService;
     private final KindOfTransportService kindOfTransportService;
+    private final ContactService contactService;
 
     @GetMapping
     public String findAll(Model model,
@@ -55,7 +54,6 @@ public class CargoController {
 
         return "cargo_all";
     }
-
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id,
@@ -82,8 +80,13 @@ public class CargoController {
     public String create(@ModelAttribute("newCargo") @Validated CargoCreateEditDto cargo,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
-                         Model model) {
+                         Model model,
+                         Principal principal) {
         if (bindingResult.hasErrors()) {
+            if (principal != null) {
+                String contactName = principal.getName();
+                model.addAttribute("contactID", contactService.getIdByName(contactName));
+            }
             redirectAttributes.addFlashAttribute("newCargo", cargo);
             model.addAttribute("country", countryService.findAll());
             model.addAttribute("city", cityService.findAll());
@@ -95,10 +98,14 @@ public class CargoController {
     }
 
     @GetMapping("/registration")
-    public String registration(HttpSession session, Model model) {
+    public String registration(HttpSession session, Model model, Principal principal) {
         CargoCreateEditDto newCargo = (CargoCreateEditDto) session.getAttribute("newCargo");
         if (newCargo == null) {
             newCargo = new CargoCreateEditDto();
+        }
+        String contactName = principal.getName();
+        if (principal != null) {
+            model.addAttribute("contactID", contactService.getIdByName(contactName));
         }
         model.addAttribute("newCargo", newCargo);
         model.addAttribute("country", countryService.findAll());
@@ -139,7 +146,6 @@ public class CargoController {
 //    public List<String> autocompleteCity(@RequestParam("keyword") String keyword) {
 //        return cityService.findByCityName(keyword);
 //    }
-
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {

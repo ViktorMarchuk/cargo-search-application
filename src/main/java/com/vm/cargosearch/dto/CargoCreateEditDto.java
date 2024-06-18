@@ -43,6 +43,5 @@ public class CargoCreateEditDto {
 
     Integer price;
 
-    @NotNull(message = "Fill contact")
     Contact contact;
 }

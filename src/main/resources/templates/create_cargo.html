@@ -137,8 +137,7 @@
     <label>Freight rate:</label>
     <input id="price" type="number" name="price" th:value="${newCargo.price}">
     <label>Contact:</label>
-    <div class="error-message" th:if="${#fields.hasErrors('newCargo.contact')}" th:errors="*{newCargo.contact}">Error contact</div>
-    <input id="contact" type="text" name="contact" th:value="${newCargo.contact}">
+    <input id="contact" type="text" name="contact" th:value="${contactID}">
     <button type="submit" >Create loading</button>
 </form>
 <form action="/cargo">
