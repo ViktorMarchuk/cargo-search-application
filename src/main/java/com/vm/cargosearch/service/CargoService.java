@@ -1,6 +1,7 @@
 package com.vm.cargosearch.service;
 
 import com.vm.cargosearch.database.entity.Cargo;
+import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.database.repository.*;
 import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
@@ -29,13 +30,23 @@ public class CargoService {
     private final CargoCreateEditMapper cargoCreateEditMapper;
     private final CargoUpdateMapper cargoUpdateMapper;
     private final CargoUpdateReadMapper cargoUpdateReadMapper;
+    private final ContactService contactService;
 
-    public List<CargoReadDto> findAllByFilter(CargoFilter filter) {
-        return cargoRepository.findAllByFilter(filter)
+    public String getContactFromCargo(Long cargoID) {
+        return cargoRepository
+                .findById(cargoID)
                 .stream()
-                .map(cargoReadMapper::map)
-                .collect(Collectors.toList());
+                .map(cargo -> cargo.getContact().getContactName())
+                .findFirst()
+                .orElse("Contact Not Found");
     }
+
+//    public List<CargoReadDto> findAllByFilter(CargoFilter filter) {
+//        return cargoRepository.findAllByFilter(filter)
+//                .stream()
+//                .map(cargoReadMapper::map)
+//                .collect(Collectors.toList());
+//    }
 
 
     public List<CargoReadDto> findAll() {
@@ -66,6 +77,7 @@ public class CargoService {
                 .map(cargoRepository::saveAndFlush)
                 .map(cargoUpdateReadMapper::map);
     }
+
 
     @Transactional
     public boolean delete(Long id) {

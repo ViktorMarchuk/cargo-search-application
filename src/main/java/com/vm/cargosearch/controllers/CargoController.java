@@ -1,15 +1,16 @@
 package com.vm.cargosearch.controllers;
 
 import com.vm.cargosearch.database.entity.Cargo;
-import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.dto.*;
-import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargo")
@@ -36,17 +35,23 @@ public class CargoController {
     @GetMapping
     public String findAll(Model model,
                           @RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
-                          @RequestParam(value = "pageSize", defaultValue = "9") int pageSize,
+                          @RequestParam(value = "pageSize", defaultValue = "17") int pageSize,
                           @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
                           @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
                           @RequestParam(value = "countryLoad", required = false) String countryLoadName,
                           @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
-                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName) {
+                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName,
+                          Principal principal) {
         CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
         CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
         KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
         CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
         Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
+        if (principal != null) {
+            String contactName = principal.getName();
+            model.addAttribute("contactID", contactService.getIdByName(contactName));
+            model.addAttribute("contactName", contactName);
+        }
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", cargoPage.getTotalPages());
         model.addAttribute("totalItems", cargoPage.getTotalElements());
@@ -58,8 +63,14 @@ public class CargoController {
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id,
                            Model model,
-                           HttpSession session) {
+                           HttpSession session,
+                           Principal principal) {
         CargoCreateEditDto updateCargo = (CargoCreateEditDto) session.getAttribute("cargo");
+        String principalName = principal.getName();
+        String contactName = cargoService.getContactFromCargo(id);
+        if (principalName != null && !principalName.equals(contactName)) {
+            return "error";
+        }
         if (updateCargo == null) {
             updateCargo = new CargoCreateEditDto();
         }
@@ -103,8 +114,9 @@ public class CargoController {
         if (newCargo == null) {
             newCargo = new CargoCreateEditDto();
         }
-        String contactName = principal.getName();
+
         if (principal != null) {
+            String contactName = principal.getName();
             model.addAttribute("contactID", contactService.getIdByName(contactName));
         }
         model.addAttribute("newCargo", newCargo);
@@ -119,7 +131,7 @@ public class CargoController {
         return "/create_cargo";
     }
 
-    @PostMapping("/{id}/update")
+        @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id, @ModelAttribute("cargo") @Validated CargoUpdateDto cargo,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
@@ -134,6 +146,7 @@ public class CargoController {
         cargoService.update(id, cargo);
         return "redirect:/cargo";
     }
+
 
 //    @GetMapping("/autocomplete")
 //    @ResponseBody

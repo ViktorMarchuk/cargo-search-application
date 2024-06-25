@@ -147,10 +147,6 @@
     <label for="price">Freight rate:
         <input id="price" type="number" name="price" th:value="${cargo.price}">
     </label>
-<!--    <div class="error-message" th:if="${#fields.hasErrors('cargo.contact')}" th:errors="*{cargo.contact}"></div>-->
-<!--    <label for="contact">Contact:-->
-<!--        <input id="contact" type="text" name="contact" th:value="${cargo.contact}">-->
-<!--    </label>-->
     <button type="submit">Update loading</button>
 </form>
 <form th:action="@{/cargo/{cargoId}/delete(cargoId=${cargo.id})}" method="post">
@@ -159,89 +155,5 @@
 <form action="/cargo">
     <button type="submit">To main page</button>
 </form>
-<!--<h2>Form for update or delete</h2>-->
-<!--<form th:if="${cargo != null}" th:action="@{|/cargo/${cargo.id}/update|}" enctype="multipart/form-data" method="post">-->
-<!--    <label for="loadDate">Date:-->
-<!--        <div class="error-message" th:if="${#fields.hasErrors('cargo.loadDate')}" th:errors="*{cargo.loadDate}"></div>-->
-<!--        <input id="loadDate" type="date" name="loadDate" th:value="${cargo.loadDate}">-->
-<!--    </label>-->
-<!--    <input type="hidden" name="newCargo" th:value="${cargo}"/>-->
-<!--    <label for="countryLoad">Loading country:</label>-->
-<!--    <div class="error-message" th:if="${#fields.hasErrors('cargo.countryLoad')}" th:errors="*{cargo.countryLoad}"></div>-->
-<!--    <div>-->
-<!--        <select id="countryLoad" name="countryLoad">-->
-<!--            <option value="" disabled selected hidden>Select country:</option>-->
-<!--            <option th:each="countryLoading : ${country}"-->
-<!--                    th:value="${countryLoading?.id}"-->
-<!--                    th:text="${countryLoading?.name}">Loading country-->
-<!--            </option>-->
-<!--        </select>-->
-<!--    </div>-->
-<!--    <label for="citiLoad" name="cityLoad">Loading city</label>-->
-<!--    <div class="error-message" th:if="${#fields.hasErrors('cargo.cityLoad')}" th:errors="*{cargo.cityLoad}"></div>-->
-<!--    <div>-->
-<!--        <select id="citiLoad" name="cityLoad">-->
-<!--            <option value="" disabled selected hidden>Select city:</option>-->
-<!--            <option th:each="cityLoading : ${city}"-->
-<!--                    th:value="${cityLoading.id()}"-->
-<!--                    th:text="${cityLoading.name()}">Loading city-->
-<!--            </option>-->
-<!--        </select>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label for="countryUnload">Unloading country-->
-<!--            <div class="error-message" th:if="${#fields.hasErrors('cargo.countryUnload')}" th:errors="*{cargo.countryUnload}"></div>-->
-<!--            <select id="countryUnload" name="countryUnload">-->
-<!--                <option value="" disabled selected hidden>Select country:</option>-->
-<!--                <option th:each="countryUnload : ${country}"-->
-<!--                        th:value="${countryUnload.id()}"-->
-<!--                        th:text="${countryUnload.name()}">Unloading country-->
-<!--                </option>-->
-<!--            </select>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label for="cityUnload">Unloading city-->
-<!--            <div class="error-message" th:if="${#fields.hasErrors('cargo.cityUnload')}" th:errors="*{cargo.cityUnload}"></div>-->
-<!--            <select id="cityUnload" name="cityUnload">-->
-<!--                <option value="" disabled selected hidden>Select city:</option>-->
-<!--                <option th:each="cityUnload : ${city}"-->
-<!--                        th:value="${cityUnload.id()}"-->
-<!--                        th:text="${cityUnload.name()}">Unloading city-->
-<!--                </option>-->
-<!--            </select>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label for="kindOfTransport">Kind of transport-->
-<!--            <div class="error-message" th:if="${#fields.hasErrors('cargo.kindOfTransport')}" th:errors="*{cargo.kindOfTransport}"></div>-->
-<!--            <select id="kindOfTransport" name="kindOfTransport">-->
-<!--                <option value="" disabled selected hidden>Select kind of transport:</option>-->
-<!--                <option th:each="transportName : ${transport}"-->
-<!--                        th:value="${transportName.id()}"-->
-<!--                        th:text="${transportName.name()}">Kind of transport-->
-<!--                </option>-->
-<!--            </select>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <label for="nameOfLoad">Description of cargo:-->
-<!--        <input id="nameOfLoad" type="text" name="nameOfLoad" th:value="${cargo.nameOfLoad}">-->
-<!--    </label>-->
-<!--    <div class="error-message" th:if="${#fields.hasErrors('cargo.nameOfLoad')}" th:errors="*{cargo.nameOfLoad}"></div>-->
-<!--    <label for="price">Freight rate:-->
-<!--        <input id="price" type="number" name="price" th:value="${cargo.price}">-->
-<!--    </label>-->
-<!--&lt;!&ndash;    <div class="error-message" th:if="${#fields.hasErrors('cargo.contact')}" th:errors="*{cargo.contact}"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;    <label for="contact">Contact:&ndash;&gt;-->
-<!--&lt;!&ndash;        <input id="contact" type="text" name="contact" th:value="${cargo.contact}">&ndash;&gt;-->
-<!--&lt;!&ndash;    </label>&ndash;&gt;-->
-<!--    <button type="submit">Update loading</button>-->
-<!--</form>-->
-<!--<form th:if="${cargo != null}" th:action="@{/cargo/{cargoId}/delete(cargoId=${cargo.id})}" method="post">-->
-<!--    <button type="submit">Delete</button>-->
-<!--</form>-->
-<!--<form action="/cargo">-->
-<!--    <button type="submit">To main page</button>-->
-<!--</form>-->
 </body>
 </html>
