@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>All cargo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body::before {
             content: '';
             position: fixed;
-            top: 90%; /* Положение по вертикали */
+            top: 90%;
             left: 0;
-            margin-left: 20px; /* Сдвигаем линию вправо на 20px */
-            margin-right: 20px; /* Сдвигаем линию влево на 20px */
-            width: calc(100% - 40px); /* Ширина линии, чтобы она протягивалась по всей ширине страницы, учитывая сдвиги */
-            height: 2px; /* Высота линии */
-            background-color: darkgray; /* Цвет линии */
-            z-index: 9999; /* Установка z-index, чтобы линия отображалась поверх других элементов */
+            margin-left: 20px;
+            margin-right: 20px;
+            width: calc(100% - 40px);
+            height: 2px;
+            background-color: darkgray;
+            z-index: 9999;
         }
 
         body {
@@ -47,6 +48,7 @@
             border-top: 10px solid #6ea68a;
             width: 100%;
             letter-spacing: 5px;
+            font-family: 'Book Antiqua';
         }
 
         table {
@@ -134,6 +136,25 @@
             bottom: 850px;
             left: 15px;
         }
+        .user-info {
+            position: fixed;
+            bottom: 350px;
+            left: 19px;
+            font-size: 17px;
+            font-weight: bold;
+            max-width: 200px; /* Ограничивает максимальную ширину блока */
+        }
+
+        .user-info div {
+            display: block; /* Каждый элемент на новой строке */
+            white-space: nowrap; /* Запрещает перенос */
+        }
+
+        .user-info span {
+            display: block; /* Каждый элемент на новой строке */
+            overflow: hidden; /* Скрытие текста, который не помещается */
+            text-overflow: ellipsis; /* Добавление многоточия для текста, который не помещается */
+        }
     </style>
 </head>
 <body>
@@ -196,7 +217,6 @@
         </span>
                     </div>
                 </td>
-
             </tr>
         </th:block>
         </tbody>
@@ -240,5 +260,9 @@
     }
     setInterval(updateDateTime, 1000);
 </script>
+<div class="user-info">
+    <div>On the page user: <span th:text="${contactName}">userName</span></div>
+    <div>User ID: <span th:text="${contactID}">userID</span></div>
+</div>
 </body>
 </html>

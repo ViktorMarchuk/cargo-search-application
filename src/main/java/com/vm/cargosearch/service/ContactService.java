@@ -1,6 +1,5 @@
 package com.vm.cargosearch.service;
 
-import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.database.repository.ContactRepository;
 import com.vm.cargosearch.dto.ContactCreateDto;
 import com.vm.cargosearch.dto.ContactDetailsDto;
@@ -9,6 +8,9 @@ import com.vm.cargosearch.mapper.ContactCreateMapper;
 import com.vm.cargosearch.mapper.ContactDetailsMapper;
 import com.vm.cargosearch.mapper.ContactReadMapper;
 import lombok.RequiredArgsConstructor;
+
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -62,5 +63,14 @@ public class ContactService implements UserDetailsService {
                 .map(contact -> contact.getId())
                 .findFirst()
                 .orElseThrow();
+    }
+
+    public String findContactNameById(Integer id) {
+        return contactRepository
+                .findById(id)
+                .stream()
+                .map(contact -> contact.getContactName())
+                .findAny()
+                .orElse("Contact not found");
     }
 }

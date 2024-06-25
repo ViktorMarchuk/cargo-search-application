@@ -11,7 +11,9 @@ import com.vm.cargosearch.database.repository.CountryRepository;
 import com.vm.cargosearch.database.repository.KindOfTransportRepository;
 import com.vm.cargosearch.service.CargoService;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.annotation.Commit;
 
 import java.util.List;
@@ -33,6 +35,12 @@ public class CargoServiceTestIT {
     private final Long CARGO_ID = 3L;
     private final int EXPECTED_PRICE = 4800;
 
+    @Test
+    void getContactFromCargoTest(){
+        String result = cargoService.getContactFromCargo(4L);
+        System.out.println("Result: " + result);
+        Assertions.assertEquals("Anna", result);
+    }
 
     @Test
     void findAllTest() {
