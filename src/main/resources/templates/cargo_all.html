@@ -138,7 +138,7 @@
         }
         .user-info {
             position: fixed;
-            bottom: 350px;
+            bottom: 320px;
             left: 19px;
             font-size: 17px;
             font-weight: bold;
@@ -171,6 +171,8 @@
         <input class="filter-input" id="countryUnload" type="text" name="countryUnload">
         <label class="filter-label" for="kindOfTransport">Kind of transport:</label>
         <input class="filter-input" id="kindOfTransport" type="text" name="kindOfTransport">
+        <label class="filter-label" for="contact">Yours loading, enter your name:</label>
+        <input class="filter-input" id="contact" type="text" name="contactNameFilter">
         <button class="submit-button" type="submit">Filter</button>
     </form>
     <form action="/cargo/registration">
@@ -181,7 +183,7 @@
     </form>
 </div>
 <div class="table-container">
-    <h1> Download list </h1>
+    <h1> ---------------------------------------   Download list     ------------------------------------------- </h1>
     <table border="5">
         <thead>
         <tr>
@@ -212,7 +214,7 @@
                 <td th:text="${loading.price}">Price</td>
                 <td th:if="${loading.contact != null}">
                     <div th:if="${loading.contact.id != null}">
-        <span>Контактное лицо :
+        <span>Contact name :
             <a th:href="@{'/contact_name/' + ${loading.contact.id}}" th:text="${loading.contact.contactName}"></a>
         </span>
                     </div>

@@ -5,6 +5,8 @@ import com.vm.cargosearch.service.ContactService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -26,7 +28,11 @@ public class LoginController {
     }
 
     @PostMapping("/authorisation")
-    public String create(@ModelAttribute("newContact") ContactCreateDto contact) {
+    public String create(@ModelAttribute("newContact") @Validated ContactCreateDto contact,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "authorisation";
+        }
         contactService.create(contact);
 
         return "redirect:/login";
