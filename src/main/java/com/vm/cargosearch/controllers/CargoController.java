@@ -41,21 +41,29 @@ public class CargoController {
                           @RequestParam(value = "countryLoad", required = false) String countryLoadName,
                           @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
                           @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName,
+                          @RequestParam(value = "contactNameFilter", required = false) String contactName,
                           Principal principal) {
         CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
         CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
         KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
-        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
+        ContactReadDtoByName contactReadDtoByName = contactName != null ? new ContactReadDtoByName(null, contactName) : null;
+        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport, contactReadDtoByName);
         Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
-        if (principal != null) {
-            String contactName = principal.getName();
-            model.addAttribute("contactID", contactService.getIdByName(contactName));
-            model.addAttribute("contactName", contactName);
-        }
+
+//        if (principal != null) {
+//            String contactName = principal.getName();
+//            model.addAttribute("contactID", contactService.getIdByName(contactName));
+//            model.addAttribute("contactName", contactName);
+//        }
+
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", cargoPage.getTotalPages());
         model.addAttribute("totalItems", cargoPage.getTotalElements());
         model.addAttribute("cargo", cargoPage.getContent());
+
+        String name = principal.getName();
+        model.addAttribute("contactID", contactService.getIdByName(name));
+        model.addAttribute("contactName", name);
 
         return "cargo_all";
     }
@@ -82,6 +90,7 @@ public class CargoController {
                     model.addAttribute("country", countryService.findAll());
                     model.addAttribute("city", cityService.findAll());
                     model.addAttribute("transport", kindOfTransportService.findAll());
+
                     return "/cargo";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -105,11 +114,14 @@ public class CargoController {
             return "create_cargo";
         }
         cargoService.create(cargo);
+
         return "redirect:/cargo";
     }
 
     @GetMapping("/registration")
-    public String registration(HttpSession session, Model model, Principal principal) {
+    public String registration(HttpSession session,
+                               Model model,
+                               Principal principal) {
         CargoCreateEditDto newCargo = (CargoCreateEditDto) session.getAttribute("newCargo");
         if (newCargo == null) {
             newCargo = new CargoCreateEditDto();
@@ -128,11 +140,13 @@ public class CargoController {
             model.addAttribute("selectedCountryLoad", newCargo.getCountryLoad().getId());
         }
         session.removeAttribute("newCargo");
+
         return "/create_cargo";
     }
 
-        @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Long id, @ModelAttribute("cargo") @Validated CargoUpdateDto cargo,
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable("id") Long id,
+                         @ModelAttribute("cargo") @Validated CargoUpdateDto cargo,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
                          Model model) {
@@ -144,6 +158,7 @@ public class CargoController {
             return "cargo";
         }
         cargoService.update(id, cargo);
+
         return "redirect:/cargo";
     }
 

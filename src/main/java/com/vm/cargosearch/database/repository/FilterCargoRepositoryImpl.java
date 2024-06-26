@@ -41,6 +41,10 @@ public class FilterCargoRepositoryImpl implements FilterCargoRepository {
             String kindOfTransportNameLowerCase = filter.kindOfTransport().name().toLowerCase();
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(cargo.get("kindOfTransport").get("name")), "%" + kindOfTransportNameLowerCase + "%"));
         }
+        if (filter.contact() != null && filter.contact().contactName() != null && !filter.contact().contactName().isBlank()) {
+            String contactNameToLowerCase = filter.contact().contactName().toLowerCase();
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(cargo.get("contact").get("contactName")),"%" + contactNameToLowerCase +"%"));
+        }
         criteria.where(predicates.toArray(Predicate[]::new));
         return entityManager.createQuery(criteria).getResultList();
     }

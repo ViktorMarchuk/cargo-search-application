@@ -34,6 +34,7 @@
         th {
             background-color: #f2f2f2;
             width: 30%; /* Установлена ширина столбца заголовков */
+            vertical-align: top;
         }
         td {
             width: 70%; /* Установлена ширина столбца данных */
@@ -51,47 +52,82 @@
         button:hover {
             background-color: darkgreen;
         }
-        .error {
-            color: red;
-            margin-top: 10px;
-            font-size: 16px; /* Увеличен размер шрифта */
-        }
+        /*.error {*/
+        /*    color: red;*/
+        /*    margin-top: 10px;*/
+        /*    font-size: 16px; !* Увеличен размер шрифта *!*/
+        /*}*/
         input[type="text"], input[type="email"], input[type="password"] {
             width: 100%;
             padding: 10px;
             font-size: 16px;
             box-sizing: border-box;
         }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 <div class="form-container">
     <h2>Authorisation:</h2>
-    <form th:action="@{/authorisation}" method="post">
+    <form th:action="@{/authorisation}" method="post" autocomplete="off">
         <table>
             <tr>
-                <th><label for="companyName">Company name:</label></th>
-                <td><input id="companyName" type="text" name="companyName" th:field="*{newContact.companyName}"></td>
+                <th>
+                    <label for="companyName">Company name:</label>
+                    <div class="error-message" th:if="${#fields.hasErrors('newContact.companyName')}" th:errors="${newContact.companyName}">Error company name</div>
+                </th>
+                <td>
+                    <input id="companyName" type="text" name="companyName" th:field="*{newContact.companyName}">
+                </td>
             </tr>
             <tr>
-                <th><label for="address">Address:</label></th>
-                <td><input id="address" type="text" name="address" th:field="*{newContact.address}"></td>
+                <th>
+                    <label for="address">Address:</label>
+                    <div class="error-message" th:if="${#fields.hasErrors('newContact.address')}" th:errors="${newContact.address}">Error address</div>
+                </th>
+                <td>
+                    <input id="address" type="text" name="address" th:field="*{newContact.address}">
+                </td>
             </tr>
             <tr>
-                <th><label for="email">Email:</label></th>
-                <td><input id="email" type="email" name="email" th:field="*{newContact.email}"></td>
+                <th>
+                    <label for="email">Email:</label>
+                    <div class="error-message" th:if="${#fields.hasErrors('newContact.email')}" th:errors="${newContact.email}">Error email</div>
+                </th>
+                <td>
+                    <input id="email" type="email" name="email" th:field="*{newContact.email}">
+                </td>
             </tr>
             <tr>
-                <th><label for="telephone">Telephone:</label></th>
-                <td><input id="telephone" type="text" name="telephone" th:field="*{newContact.telephone}"></td>
+                <th>
+                    <label for="telephone">Telephone:</label>
+                    <div class="error-message" th:if="${#fields.hasErrors('newContact.telephone')}" th:errors="${newContact.telephone}">Error telephone</div>
+                </th>
+                <td>
+                    <input id="telephone" type="text" name="telephone" th:field="*{newContact.telephone}">
+                </td>
             </tr>
             <tr>
-                <th><label for="contactName">Contact name:</label></th>
-                <td><input id="contactName" type="text" name="contactName" th:field="*{newContact.contactName}"></td>
+                <th>
+                    <label for="contactName">Contact name:</label>
+                    <div class="error-message" th:if="${#fields.hasErrors('newContact.contactName')}" th:errors="${newContact.contactName}">Error contact name</div>
+                </th>
+                <td>
+                    <input id="contactName" type="text" name="contactName" th:field="*{newContact.contactName}">
+                </td>
             </tr>
             <tr>
-                <th><label for="password">Password:</label></th>
-                <td><input id="password" type="password" name="password" th:field="*{newContact.password}"></td>
+                <th>
+                    <label for="password">Password:</label>
+                    <div class="error-message" th:if="${#fields.hasErrors('newContact.password')}" th:errors="${newContact.password}">Error password</div>
+                </th>
+                <td>
+                    <input id="password" type="password" name="password" th:field="*{newContact.password}">
+                </td>
             </tr>
         </table>
         <button type="submit">Send</button>

@@ -6,5 +6,6 @@ public record CargoFilter(LocalDate loadDateFrom,
                           LocalDate loadDate,
                           CountryReadDto countryLoad,
                           CountryReadDto countryUnload,
-                          KindOfTransportReadDto kindOfTransport) {
+                          KindOfTransportReadDto kindOfTransport,
+                          ContactReadDtoByName contact) {
 }
