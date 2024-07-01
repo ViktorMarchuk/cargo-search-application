@@ -139,7 +139,7 @@
 
         .user-info {
             position: fixed;
-            bottom: 320px;
+            bottom: 350px;
             left: 19px;
             font-size: 17px;
             font-weight: bold;
@@ -161,7 +161,7 @@
 <body>
 <div class="filters-container">
     <h2>Filter</h2>
-    <form action="/cargo" autocomplete="off">
+    <form action="/cargo/my_cargo" autocomplete="off">
         <label class="filter-label" for="loadDateFrom">From date:</label>
         <input class="filter-input" id="loadDateFrom" type="date" name="loadDateFrom">
         <label class="filter-label" for="loadDate">Before date:</label>
@@ -172,8 +172,6 @@
         <input class="filter-input" id="countryUnload" type="text" name="countryUnload">
         <label class="filter-label" for="kindOfTransport">Kind of transport:</label>
         <input class="filter-input" id="kindOfTransport" type="text" name="kindOfTransport">
-<!--        <label class="filter-label" for="contact">Yours loading, enter your name:</label>-->
-<!--        <input class="filter-input" id="contact" type="text" name="contactNameFilter">-->
         <button class="submit-button" type="submit">Filter</button>
     </form>
     <form action="/cargo/registration">
@@ -182,14 +180,9 @@
     <form action="/cargo">
         <button class="create-button" type="submit">To main page</button>
     </form>
-
-    <form action="/cargo/my_cargo">
-        <button class="create-button" type="submit">My loadings</button>
-    </form>
-
 </div>
 <div class="table-container">
-    <h1> --------------------------------------- Download list ------------------------------------------- </h1>
+    <h1> ---------------------Welcome, <span th:text="${contactName}"></span> to your download list ------------------------ </h1>
     <table border="5">
         <thead>
         <tr>
@@ -206,22 +199,22 @@
         </tr>
         </thead>
         <tbody>
-        <th:block th:if="${cargo != null}">
-            <tr th:each="loading : ${cargo}" th:if="${loading != null}">
-                <td><a th:href="@{'/cargo/'+ ${loading.id}}" th:text="${loading.id}">Id</a></td>
-                <td th:text="${loading.loadDate}">Date</td>
-                <td th:text="${loading.countryLoad != null ? loading.countryLoad.name : ''}">Load Country Name</td>
-                <td th:text="${loading.cityLoad != null ? loading.cityLoad.name : ''}">Loading city</td>
-                <td th:text="${loading.countryUnload != null ? loading.countryUnload.name : ''}">Unload Country Name
+        <th:block th:if="${cargos != null}">
+            <tr th:each="loadings : ${cargos}" th:if="${loadings != null}">
+                <td><a th:href="@{'/cargo/'+ ${loadings.id}}" th:text="${loadings.id}">Id</a></td>
+                <td th:text="${loadings.loadDate}">Date</td>
+                <td th:text="${loadings.countryLoad != null ? loadings.countryLoad.name : ''}">Load Country Name</td>
+                <td th:text="${loadings.cityLoad != null ? loadings.cityLoad.name : ''}">Loading city</td>
+                <td th:text="${loadings.countryUnload != null ? loadings.countryUnload.name : ''}">Unload Country Name
                 </td>
-                <td th:text="${loading.cityUnload != null ? loading.cityUnload.name : ''}">Unload city</td>
-                <td th:text="${loading.kindOfTransport != null ? loading.kindOfTransport.name : ''}">Transport</td>
-                <td th:text="${loading.nameOfLoad}">Name of cargo</td>
-                <td th:text="${loading.price}">Price</td>
-                <td th:if="${loading.contact != null}">
-                    <div th:if="${loading.contact.id != null}">
+                <td th:text="${loadings.cityUnload != null ? loadings.cityUnload.name : ''}">Unload city</td>
+                <td th:text="${loadings.kindOfTransport != null ? loadings.kindOfTransport.name : ''}">Transport</td>
+                <td th:text="${loadings.nameOfLoad}">Name of cargo</td>
+                <td th:text="${loadings.price}">Price</td>
+                <td th:if="${loadings.contact != null}">
+                    <div th:if="${loadings.contact.id != null}">
         <span>Contact name :
-            <a th:href="@{'/contact_name/' + ${loading.contact.id}}" th:text="${loading.contact.contactName}"></a>
+            <a th:href="@{'/contact_name/' + ${loadings.contact.id}}" th:text="${loadings.contact.contactName}"></a>
         </span>
                     </div>
                 </td>
@@ -243,7 +236,7 @@
     <div class="page-numbers">
         Page numbers:
         <span th:each="pageNo, iterStat: ${#numbers.sequence(1, totalPages)}">
-            <a class="page-link" th:href="@{'/cargo?pageNo=' + ${pageNo}}">[[${pageNo}]]</a>
+            <a class="page-link" th:href="@{'/cargo/my_cargo?pageNo=' + ${pageNo}}">[[${pageNo}]]</a>
             <span th:if="${!iterStat.last}">, </span>
         </span>
     </div>

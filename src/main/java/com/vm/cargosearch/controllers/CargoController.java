@@ -5,8 +5,6 @@ import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -21,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/cargo")
@@ -41,29 +40,25 @@ public class CargoController {
                           @RequestParam(value = "countryLoad", required = false) String countryLoadName,
                           @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
                           @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName,
-                          @RequestParam(value = "contactNameFilter", required = false) String contactName,
+//                          @RequestParam(value = "contactNameFilter", required = false) String contactName,
                           Principal principal) {
         CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
         CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
         KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
-        ContactReadDtoByName contactReadDtoByName = contactName != null ? new ContactReadDtoByName(null, contactName) : null;
-        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport, contactReadDtoByName);
+//        ContactReadDtoByName contactReadDtoByName = contactName != null ? new ContactReadDtoByName(null, contactName) : null;
+        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
         Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
 
-//        if (principal != null) {
-//            String contactName = principal.getName();
-//            model.addAttribute("contactID", contactService.getIdByName(contactName));
-//            model.addAttribute("contactName", contactName);
-//        }
+        if (principal != null) {
+            String contactName = principal.getName();
+            model.addAttribute("contactID", contactService.getIdByName(contactName));
+            model.addAttribute("contactName", contactName);
+        }
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", cargoPage.getTotalPages());
         model.addAttribute("totalItems", cargoPage.getTotalElements());
         model.addAttribute("cargo", cargoPage.getContent());
-
-        String name = principal.getName();
-        model.addAttribute("contactID", contactService.getIdByName(name));
-        model.addAttribute("contactName", name);
 
         return "cargo_all";
     }
@@ -181,5 +176,43 @@ public class CargoController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return "redirect:/cargo";
+    }
+
+    @GetMapping("/my_cargo")
+    public String filterLoadingsByContact(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
+                                          @RequestParam(value = "pageSize", defaultValue = "16") int pageSize,
+                                          @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
+                                          @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
+                                          @RequestParam(value = "countryLoad", required = false) String countryLoadName,
+                                          @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
+                                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName,
+                                          Model model,
+                                          Principal principal) {
+        CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
+        CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
+        KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
+        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
+        Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
+
+        String contactName = "";
+        if (principal != null) {
+            contactName = principal.getName();
+        }
+        List<Cargo> allCargosByContact = cargoService.getAllLoadingsByContactName(contactName);
+        int totalItems = allCargosByContact.size();
+        int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+        int startIndex = (pageNo - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, totalItems);
+        List<Cargo> paginatedCargosByContact = allCargosByContact.subList(startIndex, endIndex);
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("cargo", cargoPage.getContent());
+        model.addAttribute("cargos", paginatedCargosByContact);
+        model.addAttribute("contactID", contactService.getIdByName(contactName));
+        model.addAttribute("contactName", contactName);
+
+        return "my_loadings";
     }
 }

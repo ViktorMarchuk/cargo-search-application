@@ -1,14 +1,12 @@
 package com.vm.cargosearch.service;
 
 import com.vm.cargosearch.database.entity.Cargo;
-import com.vm.cargosearch.database.entity.Contact;
 import com.vm.cargosearch.database.repository.*;
 import com.vm.cargosearch.dto.*;
 import com.vm.cargosearch.mapper.CargoCreateEditMapper;
 import com.vm.cargosearch.mapper.CargoReadMapper;
 import com.vm.cargosearch.mapper.CargoUpdateMapper;
 import com.vm.cargosearch.mapper.CargoUpdateReadMapper;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -32,6 +30,14 @@ public class CargoService {
     private final CargoUpdateReadMapper cargoUpdateReadMapper;
     private final ContactService contactService;
 
+    public List<Cargo> getAllLoadingsByContactName(String name) {
+        return cargoRepository
+                .findAllByContactContactName(name)
+                .stream()
+                .toList();
+
+    }
+
     public String getContactFromCargo(Long cargoID) {
         return cargoRepository
                 .findById(cargoID)
@@ -40,14 +46,6 @@ public class CargoService {
                 .findFirst()
                 .orElse("Contact Not Found");
     }
-
-//    public List<CargoReadDto> findAllByFilter(CargoFilter filter) {
-//        return cargoRepository.findAllByFilter(filter)
-//                .stream()
-//                .map(cargoReadMapper::map)
-//                .collect(Collectors.toList());
-//    }
-
 
     public List<CargoReadDto> findAll() {
         return cargoRepository.findAll()
@@ -70,6 +68,7 @@ public class CargoService {
                 .map(cargoReadMapper::map)
                 .orElseThrow();
     }
+
     @Transactional
     public Optional<CargoUpdateReadDto> update(Long id, CargoUpdateDto cargo) {
         return cargoRepository.findById(id)

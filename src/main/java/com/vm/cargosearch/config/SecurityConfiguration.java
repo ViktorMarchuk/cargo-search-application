@@ -17,7 +17,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/authorisation", "/cargo").permitAll()
+                        .requestMatchers("/cargo","/login", "/authorisation").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login.loginPage("/login")

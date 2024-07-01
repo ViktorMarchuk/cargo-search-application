@@ -1,10 +1,7 @@
 package com.vm.cargosearch.integration.service;
 
 import com.vm.cargosearch.annotation.IT;
-import com.vm.cargosearch.database.entity.City;
-import com.vm.cargosearch.database.entity.Contact;
-import com.vm.cargosearch.database.entity.Country;
-import com.vm.cargosearch.database.entity.KindOfTransport;
+import com.vm.cargosearch.database.entity.*;
 import com.vm.cargosearch.database.repository.CityRepository;
 import com.vm.cargosearch.database.repository.ContactRepository;
 import com.vm.cargosearch.database.repository.CountryRepository;
@@ -13,7 +10,6 @@ import com.vm.cargosearch.service.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.annotation.Commit;
 
 import java.util.List;
@@ -34,6 +30,13 @@ public class CargoServiceTestIT {
     private final KindOfTransportRepository kindOfTransportRepository;
     private final Long CARGO_ID = 3L;
     private final int EXPECTED_PRICE = 4800;
+
+    @Test
+    void getAllLoadingsByContactNameTest(){
+        List<Cargo> cargos = cargoService.getAllLoadingsByContactName("Anna");
+        System.out.println("Cargos: " + cargos);
+        Assertions.assertEquals(cargos.size(), 7);
+    }
 
     @Test
     void getContactFromCargoTest(){
