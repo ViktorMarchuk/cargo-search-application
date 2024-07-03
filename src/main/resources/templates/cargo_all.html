@@ -143,18 +143,18 @@
             left: 19px;
             font-size: 17px;
             font-weight: bold;
-            max-width: 200px; /* Ограничивает максимальную ширину блока */
+            max-width: 200px;
         }
 
         .user-info div {
-            display: block; /* Каждый элемент на новой строке */
-            white-space: nowrap; /* Запрещает перенос */
+            display: block;
+            white-space: nowrap;
         }
 
         .user-info span {
-            display: block; /* Каждый элемент на новой строке */
-            overflow: hidden; /* Скрытие текста, который не помещается */
-            text-overflow: ellipsis; /* Добавление многоточия для текста, который не помещается */
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
@@ -172,8 +172,8 @@
         <input class="filter-input" id="countryUnload" type="text" name="countryUnload">
         <label class="filter-label" for="kindOfTransport">Kind of transport:</label>
         <input class="filter-input" id="kindOfTransport" type="text" name="kindOfTransport">
-<!--        <label class="filter-label" for="contact">Yours loading, enter your name:</label>-->
-<!--        <input class="filter-input" id="contact" type="text" name="contactNameFilter">-->
+        <!--        <label class="filter-label" for="contact">Yours loading, enter your name:</label>-->
+        <!--        <input class="filter-input" id="contact" type="text" name="contactNameFilter">-->
         <button class="submit-button" type="submit">Filter</button>
     </form>
     <form action="/cargo/registration">
@@ -186,7 +186,9 @@
     <form action="/cargo/my_cargo">
         <button class="create-button" type="submit">My loadings</button>
     </form>
-
+    <form action="/login">
+        <button class="create-button" type="submit">Login</button>
+    </form>
 </div>
 <div class="table-container">
     <h1> --------------------------------------- Download list ------------------------------------------- </h1>
