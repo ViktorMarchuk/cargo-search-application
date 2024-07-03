@@ -40,12 +40,10 @@ public class CargoController {
                           @RequestParam(value = "countryLoad", required = false) String countryLoadName,
                           @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
                           @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName,
-//                          @RequestParam(value = "contactNameFilter", required = false) String contactName,
                           Principal principal) {
         CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
         CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
         KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
-//        ContactReadDtoByName contactReadDtoByName = contactName != null ? new ContactReadDtoByName(null, contactName) : null;
         CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
         Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
 
@@ -54,7 +52,6 @@ public class CargoController {
             model.addAttribute("contactID", contactService.getIdByName(contactName));
             model.addAttribute("contactName", contactName);
         }
-
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", cargoPage.getTotalPages());
         model.addAttribute("totalItems", cargoPage.getTotalElements());
@@ -110,7 +107,7 @@ public class CargoController {
         }
         cargoService.create(cargo);
 
-        return "redirect:/cargo";
+        return "redirect:/cargo/my_cargo";
     }
 
     @GetMapping("/registration")
@@ -154,7 +151,7 @@ public class CargoController {
         }
         cargoService.update(id, cargo);
 
-        return "redirect:/cargo";
+        return "redirect:/cargo/my_cargo";
     }
 
 
@@ -181,19 +178,8 @@ public class CargoController {
     @GetMapping("/my_cargo")
     public String filterLoadingsByContact(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
                                           @RequestParam(value = "pageSize", defaultValue = "16") int pageSize,
-                                          @RequestParam(value = "loadDateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDateFrom,
-                                          @RequestParam(value = "loadDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate loadDate,
-                                          @RequestParam(value = "countryLoad", required = false) String countryLoadName,
-                                          @RequestParam(value = "countryUnload", required = false) String countryUnloadName,
-                                          @RequestParam(value = "kindOfTransport", required = false) String kindOfTransportName,
                                           Model model,
                                           Principal principal) {
-        CountryReadDto countryLoad = countryLoadName != null ? new CountryReadDto(null, countryLoadName) : null;
-        CountryReadDto countryUnload = countryUnloadName != null ? new CountryReadDto(null, countryUnloadName) : null;
-        KindOfTransportReadDto kindOfTransport = kindOfTransportName != null ? new KindOfTransportReadDto(null, kindOfTransportName) : null;
-        CargoFilter filter = new CargoFilter(loadDateFrom, loadDate, countryLoad, countryUnload, kindOfTransport);
-        Page<Cargo> cargoPage = cargoService.findByPage(pageNo, pageSize, filter);
-
         String contactName = "";
         if (principal != null) {
             contactName = principal.getName();
@@ -208,7 +194,6 @@ public class CargoController {
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalItems", totalItems);
-        model.addAttribute("cargo", cargoPage.getContent());
         model.addAttribute("cargos", paginatedCargosByContact);
         model.addAttribute("contactID", contactService.getIdByName(contactName));
         model.addAttribute("contactName", contactName);
