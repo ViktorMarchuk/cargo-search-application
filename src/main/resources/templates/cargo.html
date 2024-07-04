@@ -83,67 +83,68 @@
     </label>
     <input type="hidden" name="newCargo" th:value="${cargo}"/>
     <label for="countryLoad">Loading country:</label>
-    <div class="error-message" th:if="${#fields.hasErrors('cargo.countryLoad')}" th:errors="*{cargo.countryLoad}"></div>
     <div>
         <select id="countryLoad" name="countryLoad">
-            <option value="" disabled selected hidden>Select country:</option>
+            <option value="" disabled hidden>Select country:</option>
             <option th:each="countryLoading : ${country}"
                     th:value="${countryLoading?.id}"
+                    th:selected="${countryLoading?.id == cargo.countryLoad.id}"
                     th:text="${countryLoading?.name}">Loading country
             </option>
         </select>
     </div>
     <label for="citiLoad" name="cityLoad">Loading city</label>
-    <div class="error-message" th:if="${#fields.hasErrors('cargo.cityLoad')}" th:errors="*{cargo.cityLoad}"></div>
     <div>
         <select id="citiLoad" name="cityLoad">
-            <option value="" disabled selected hidden>Select city:</option>
+            <option value="" disabled hidden>Select city:</option>
             <option th:each="cityLoading : ${city}"
-                    th:value="${cityLoading.id()}"
-                    th:text="${cityLoading.name()}">Loading city
+                    th:value="${cityLoading.id}"
+                    th:selected="${cityLoading.id == cargo.cityLoad.id}"
+                    th:text="${cityLoading.name}">Loading city
             </option>
         </select>
     </div>
     <div>
         <label for="countryUnload">Unloading country
-            <div class="error-message" th:if="${#fields.hasErrors('cargo.countryUnload')}" th:errors="*{cargo.countryUnload}"></div>
             <select id="countryUnload" name="countryUnload">
-                <option value="" disabled selected hidden>Select country:</option>
+                <option value="" disabled hidden>Select country:</option>
                 <option th:each="countryUnload : ${country}"
-                        th:value="${countryUnload.id()}"
-                        th:text="${countryUnload.name()}">Unloading country
+                        th:value="${countryUnload.id}"
+                        th:selected="${countryUnload.id == cargo.countryUnload.id}"
+                        th:text="${countryUnload.name}">Unloading country
                 </option>
             </select>
         </label>
     </div>
     <div>
         <label for="cityUnload">Unloading city
-            <div class="error-message" th:if="${#fields.hasErrors('cargo.cityUnload')}" th:errors="*{cargo.cityUnload}"></div>
             <select id="cityUnload" name="cityUnload">
-                <option value="" disabled selected hidden>Select city:</option>
+                <option value="" disabled hidden>Select city:</option>
                 <option th:each="cityUnload : ${city}"
-                        th:value="${cityUnload.id()}"
-                        th:text="${cityUnload.name()}">Unloading city
+                        th:value="${cityUnload.id}"
+                        th:selected="${cityUnload.id == cargo.cityUnload.id}"
+                        th:text="${cityUnload.name}">Unloading city
                 </option>
             </select>
         </label>
     </div>
     <div>
         <label for="kindOfTransport">Kind of transport
-            <div class="error-message" th:if="${#fields.hasErrors('cargo.kindOfTransport')}" th:errors="*{cargo.kindOfTransport}"></div>
             <select id="kindOfTransport" name="kindOfTransport">
-                <option value="" disabled selected hidden>Select kind of transport:</option>
+                <option value="" disabled hidden>Select kind of transport:</option>
                 <option th:each="transportName : ${transport}"
-                        th:value="${transportName.id()}"
-                        th:text="${transportName.name()}">Kind of transport
+                        th:value="${transportName.id}"
+                        th:selected="${transportName.id == cargo.kindOfTransport.id}"
+                        th:text="${transportName.name}">Kind of transport
                 </option>
             </select>
         </label>
     </div>
     <label for="nameOfLoad">Description of cargo:
+        <div class="error-message" th:if="${#fields.hasErrors('cargo.nameOfLoad')}"
+             th:errors="*{cargo.nameOfLoad}"></div>
         <input id="nameOfLoad" type="text" name="nameOfLoad" th:value="${cargo.nameOfLoad}">
     </label>
-    <div class="error-message" th:if="${#fields.hasErrors('cargo.nameOfLoad')}" th:errors="*{cargo.nameOfLoad}"></div>
     <label for="price">Freight rate:
         <input id="price" type="number" name="price" th:value="${cargo.price}">
     </label>

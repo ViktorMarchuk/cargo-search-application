@@ -67,6 +67,7 @@
             background-color: #FFA500;
             color: white;
         }
+
         .create-button {
             width: 100%;
             font-size: 12px;
@@ -81,6 +82,7 @@
             border-radius: 3px;
             margin-bottom: 100px;
         }
+
         .submit-button {
             width: 100%;
             font-size: 12px;
@@ -170,7 +172,8 @@
     </form>
 </div>
 <div class="table-container">
-    <h1> ---------------------Welcome, <span th:text="${contactName}"></span> to your download list ------------------------ </h1>
+    <h1> ---------------------Welcome, <span th:text="${contactName}"></span> to your download list
+        ------------------------ </h1>
     <table border="5">
         <thead>
         <tr>
@@ -187,32 +190,34 @@
         </tr>
         </thead>
         <tbody>
-<th:block th:if="${cargos != null}">
-    <tr th:each="loadings : ${cargos}" th:if="${loadings != null}">
-        <td><a th:href="@{'/cargo/' + ${loadings.id}}" th:text="${loadings.id}">Id</a></td>
-        <td th:text="${loadings.loadDate}">Date</td>
-        <td th:text="${loadings.countryLoad != null ? loadings.countryLoad.name : ''}">Load Country Name</td>
-        <td th:text="${loadings.cityLoad != null ? loadings.cityLoad.name : ''}">Loading city</td>
-        <td th:text="${loadings.countryUnload != null ? loadings.countryUnload.name : ''}">Unload Country Name</td>
-        <td th:text="${loadings.cityUnload != null ? loadings.cityUnload.name : ''}">Unload city</td>
-        <td th:text="${loadings.kindOfTransport != null ? loadings.kindOfTransport.name : ''}">Transport</td>
-        <td th:text="${loadings.nameOfLoad}">Name of cargo</td>
-        <td th:text="${loadings.price}">Price</td>
-        <td th:if="${loadings.contact != null}">
-            <div th:if="${loadings.contact.id != null}">
+        <th:block th:if="${cargos != null}">
+            <tr th:each="loadings : ${cargos}" th:if="${loadings != null}">
+                <td><a th:href="@{'/cargo/' + ${loadings.id}}" th:text="${loadings.id}">Id</a></td>
+                <td th:text="${loadings.loadDate}">Date</td>
+                <td th:text="${loadings.countryLoad != null ? loadings.countryLoad.name : ''}">Load Country Name</td>
+                <td th:text="${loadings.cityLoad != null ? loadings.cityLoad.name : ''}">Loading city</td>
+                <td th:text="${loadings.countryUnload != null ? loadings.countryUnload.name : ''}">Unload Country Name
+                </td>
+                <td th:text="${loadings.cityUnload != null ? loadings.cityUnload.name : ''}">Unload city</td>
+                <td th:text="${loadings.kindOfTransport != null ? loadings.kindOfTransport.name : ''}">Transport</td>
+                <td th:text="${loadings.nameOfLoad}">Name of cargo</td>
+                <td th:text="${loadings.price}">Price</td>
+                <td th:if="${loadings.contact != null}">
+                    <div th:if="${loadings.contact.id != null}">
                         <span>Contact name:
-                            <a th:href="@{'/contact_name/' + ${loadings.contact.id}}" th:text="${loadings.contact.contactName}"></a>
+                            <a th:href="@{'/contact_name/' + ${loadings.contact.id}}"
+                               th:text="${loadings.contact.contactName}"></a>
                         </span>
-            </div>
-        </td>
-    </tr>
-</th:block>
+                    </div>
+                </td>
+            </tr>
+        </th:block>
         </tbody>
     </table>
 </div>
 <div class="horizontal-line"></div>
 <div class="footer">
-    <span>© Viktor Marchuk,  2024</span>
+    <span>© developed by Viktor Marchuk,  2024</span>
     <span>viktor.marchuk0207@gmail.com</span>
     <span>+375296408606</span>
 </div>

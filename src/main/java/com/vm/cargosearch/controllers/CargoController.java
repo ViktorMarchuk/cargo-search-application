@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargo")
@@ -138,23 +139,22 @@ public class CargoController {
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id,
-                         @ModelAttribute("cargo") @Validated CargoUpdateDto cargo,
+                         @ModelAttribute("cargo") @Validated CargoUpdateDto cargoUpdateDto,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
                          Model model) {
+        Optional<CargoReadDto> cargo = cargoService.findById(id);
         if (bindingResult.hasErrors()) {
             model.addAttribute("country", countryService.findAll());
             model.addAttribute("city", cityService.findAll());
             model.addAttribute("transport", kindOfTransportService.findAll());
-            redirectAttributes.addFlashAttribute("cargo", cargo);
+            cargo.ifPresent(c -> redirectAttributes.addFlashAttribute("cargo", c));
             return "cargo";
         }
-        cargoService.update(id, cargo);
+        cargoService.update(id, cargoUpdateDto);
 
         return "redirect:/cargo/my_cargo";
     }
-
-
 //    @GetMapping("/autocomplete")
 //    @ResponseBody
 //    public List<String> autocomplete(@RequestParam("keyword") String keyword) {
