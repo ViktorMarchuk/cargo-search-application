@@ -2,16 +2,22 @@ package com.vm.cargosearch.integration.service;
 
 import com.vm.cargosearch.annotation.IT;
 import com.vm.cargosearch.database.entity.*;
-import com.vm.cargosearch.database.repository.CityRepository;
-import com.vm.cargosearch.database.repository.ContactRepository;
-import com.vm.cargosearch.database.repository.CountryRepository;
-import com.vm.cargosearch.database.repository.KindOfTransportRepository;
+import com.vm.cargosearch.database.repository.*;
+import com.vm.cargosearch.dto.CargoFilter;
+import com.vm.cargosearch.dto.CountryReadDto;
+import com.vm.cargosearch.dto.KindOfTransportReadDto;
 import com.vm.cargosearch.service.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Commit;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +25,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 @IT
 @RequiredArgsConstructor
@@ -28,6 +35,7 @@ public class CargoServiceTestIT {
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
     private final KindOfTransportRepository kindOfTransportRepository;
+    private final CargoRepository cargoRepository;
     private final Long CARGO_ID = 3L;
     private final int EXPECTED_PRICE = 4800;
 
@@ -35,7 +43,7 @@ public class CargoServiceTestIT {
     void getAllLoadingsByContactNameTest(){
         List<Cargo> cargos = cargoService.getAllLoadingsByContactName("Anna");
         System.out.println("Cargos: " + cargos);
-        Assertions.assertEquals(cargos.size(), 7);
+        Assertions.assertEquals(cargos.size(), 8);
     }
 
     @Test
