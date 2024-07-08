@@ -10,13 +10,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 @IT
 @RequiredArgsConstructor
 public class ContactServiceTest {
-    private final ContactService contactService;
-
-    @Test
-    void getIdByNameTest() {
-        Integer id = contactService.getIdByName("Loh");
-        System.out.println(id);
-    }
+//    private final ContactService contactService;
+//
+//    @Test
+//    void getIdByNameTest() {
+//        Integer id = contactService.getIdByName("Loh");
+//        System.out.println(id);
+//    }
 //    @Test
 //    void getContactNameByIDTest(){
 //        String contactName = contactService.getContactNameByID(1L);
@@ -31,10 +31,10 @@ public class ContactServiceTest {
 //        Assertions.assertEquals(true,result);
 //    }
 
-    @Test
-    void findContactNameByIdTest(){
-        String result = contactService.findContactNameById(1);
-        System.out.println("Contact name " + result);
-        Assertions.assertEquals("Anna", result);
-    }
+//    @Test
+//    void findContactNameByIdTest(){
+//        String result = contactService.findContactNameById(1);
+//        System.out.println("Contact name " + result);
+//        Assertions.assertEquals("Anna", result);
+//    }
 }

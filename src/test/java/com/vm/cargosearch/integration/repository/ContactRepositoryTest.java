@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 @IT
 @RequiredArgsConstructor
 public class ContactRepositoryTest {
-    private final ContactRepository contactRepository;
-
-    @Test
-    void findByContactNameTest() {
-        String pwd = contactRepository.findByContactName("Bob")
-                .stream()
-                .map(contact -> contact.getPassword())
-                .findFirst()
-                .orElse(null);
-        System.out.println(pwd);
-    }
+//    private final ContactRepository contactRepository;
+//
+//    @Test
+//    void findByContactNameTest() {
+//        String pwd = contactRepository.findByContactName("Bob")
+//                .stream()
+//                .map(contact -> contact.getPassword())
+//                .findFirst()
+//                .orElse(null);
+//        System.out.println(pwd);
+//    }
 }

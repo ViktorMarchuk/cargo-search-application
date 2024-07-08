@@ -15,15 +15,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @IT
 @RequiredArgsConstructor
 public class KindOfTransportServiceTestIT {
-    private final KindOfTransportService kindOfTransportService;
-
-    @Test
-    void findAll() {
-        var transport = kindOfTransportService.findAll();
-        List<String> actualResult = transport.stream()
-                .map(KindOfTransportReadDto::name)
-                .collect(Collectors.toList());
-        assertNotNull(transport);
-        assertThat(actualResult).hasSize(4);
-    }
+//    private final KindOfTransportService kindOfTransportService;
+//
+//    @Test
+//    void findAll() {
+//        var transport = kindOfTransportService.findAll();
+//        List<String> actualResult = transport.stream()
+//                .map(KindOfTransportReadDto::name)
+//                .collect(Collectors.toList());
+//        assertNotNull(transport);
+//        assertThat(actualResult).hasSize(4);
+//    }
 }

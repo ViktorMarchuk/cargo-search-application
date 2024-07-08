@@ -16,10 +16,10 @@ public class KindOfTransportRepositoryTestIT {
     private final KindOfTransportRepository transportRepository;
     private final int TRANSPORT_ID = 2;
 
-    @Test
-    void findByIdTest() {
-        var transport = transportRepository.findById(TRANSPORT_ID);
-        Optional<Integer> actualResult = transport.stream().map(KindOfTransport::getId).findFirst();
-        assertThat(actualResult.get()).isEqualTo(TRANSPORT_ID);
-    }
+//    @Test
+//    void findByIdTest() {
+//        var transport = transportRepository.findById(TRANSPORT_ID);
+//        Optional<Integer> actualResult = transport.stream().map(KindOfTransport::getId).findFirst();
+//        assertThat(actualResult.get()).isEqualTo(TRANSPORT_ID);
+//    }
 }

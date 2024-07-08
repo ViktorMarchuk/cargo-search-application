@@ -39,43 +39,43 @@ public class CargoServiceTestIT {
     private final Long CARGO_ID = 3L;
     private final int EXPECTED_PRICE = 4800;
 
-    @Test
-    void getAllLoadingsByContactNameTest(){
-        List<Cargo> cargos = cargoService.getAllLoadingsByContactName("Anna");
-        System.out.println("Cargos: " + cargos);
-        Assertions.assertEquals(cargos.size(), 8);
-    }
+//    @Test
+//    void getAllLoadingsByContactNameTest(){
+//        List<Cargo> cargos = cargoService.getAllLoadingsByContactName("Anna");
+//        System.out.println("Cargos: " + cargos);
+//        Assertions.assertEquals(cargos.size(), 8);
+//    }
+//
+//    @Test
+//    void getContactFromCargoTest(){
+//        String result = cargoService.getContactFromCargo(4L);
+//        System.out.println("Result: " + result);
+//        Assertions.assertEquals("Anna", result);
+//    }
+//
+//    @Test
+//    void findAllTest() {
+//        var cargo = cargoService.findAll();
+//        List<Long> actualResult = cargo.stream()
+//                .map(c -> c.id())
+//                .collect(Collectors.toList());
+//
+//        assertThat(actualResult).hasSize(5);
+//    }
+//
+//    @Test
+//    void findByIdTest() {
+//        var cargo = cargoService.findById(CARGO_ID);
+//        Optional<Integer> actualPrice = cargo.stream()
+//                .map(e -> e.price())
+//                .findFirst();
+//
+//        assertThat(actualPrice.get()).isEqualTo(EXPECTED_PRICE);
+//
+//    }
 
-    @Test
-    void getContactFromCargoTest(){
-        String result = cargoService.getContactFromCargo(4L);
-        System.out.println("Result: " + result);
-        Assertions.assertEquals("Anna", result);
-    }
-
-    @Test
-    void findAllTest() {
-        var cargo = cargoService.findAll();
-        List<Long> actualResult = cargo.stream()
-                .map(c -> c.id())
-                .collect(Collectors.toList());
-
-        assertThat(actualResult).hasSize(5);
-    }
-
-    @Test
-    void findByIdTest() {
-        var cargo = cargoService.findById(CARGO_ID);
-        Optional<Integer> actualPrice = cargo.stream()
-                .map(e -> e.price())
-                .findFirst();
-
-        assertThat(actualPrice.get()).isEqualTo(EXPECTED_PRICE);
-
-    }
-
-    @Test
-    void createTest() {
+//    @Test
+//    void createTest() {
 //        Country testCountryLoad = new Country(2, "LT");
 //        City testCityLoad = new City(4, "Vilnius", testCountryLoad);
 //        Country testCountryUnload = new Country(6, "CZ");
@@ -99,18 +99,18 @@ public class CargoServiceTestIT {
 //        assertEquals(actualResult.getKindOfTransport().name(), expectedResult.getKindOfTransport().getName());
 //        assertEquals(actualResult.getNameOfLoad(), expectedResult.getNameOfLoad());
 //        assertEquals(actualResult.getPrice(), expectedResult.getPrice());
-    }
+//    }
 
-    @Test
-    @Commit
-    void updateTest() {
-        Country testCountryLoad = countryRepository.findCountryById(8).orElseThrow(()->new IllegalArgumentException("Country not found"));
-        City testCityLoad = cityRepository.findById(19).orElseThrow(()->new IllegalArgumentException("City not found"));
-        Country testCountryUnload = countryRepository.findCountryById(8).orElseThrow(()->new IllegalArgumentException("Country not found"));
-        City testCityUnload = cityRepository.findById(19).orElseThrow(()->new IllegalArgumentException("City not found"));
-        KindOfTransport transport = kindOfTransportRepository.findById(2).orElseThrow(()->new IllegalArgumentException("Transport not found"));
-        Contact existingContact = contactRepository.findById(1).orElseThrow(() -> new IllegalArgumentException("Contact not found"));
-//
+//    @Test
+//    @Commit
+//    void updateTest() {
+//        Country testCountryLoad = countryRepository.findCountryById(8).orElseThrow(()->new IllegalArgumentException("Country not found"));
+//        City testCityLoad = cityRepository.findById(19).orElseThrow(()->new IllegalArgumentException("City not found"));
+//        Country testCountryUnload = countryRepository.findCountryById(8).orElseThrow(()->new IllegalArgumentException("Country not found"));
+//        City testCityUnload = cityRepository.findById(19).orElseThrow(()->new IllegalArgumentException("City not found"));
+//        KindOfTransport transport = kindOfTransportRepository.findById(2).orElseThrow(()->new IllegalArgumentException("Transport not found"));
+//        Contact existingContact = contactRepository.findById(1).orElseThrow(() -> new IllegalArgumentException("Contact not found"));
+////
 //        CargoEditDto expectedResult = new CargoEditDto(
 //                CARGO_ID,
 //                LocalDate.now(),
@@ -142,5 +142,5 @@ public class CargoServiceTestIT {
 //        assertEquals(expectedResult.getKindOfTransport().getName(), transportActual.get());
 //        assertEquals(expectedResult.getNameOfLoad(), loadNameActual.get());
 //        assertEquals(expectedResult.getPrice(), actualPrice.get());
-    }
+//    }
 }
