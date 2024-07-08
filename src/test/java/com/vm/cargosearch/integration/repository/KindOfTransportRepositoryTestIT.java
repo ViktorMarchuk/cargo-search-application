@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @IT
 @RequiredArgsConstructor
 public class KindOfTransportRepositoryTestIT {
-    private final KindOfTransportRepository transportRepository;
-    private final int TRANSPORT_ID = 2;
+//    private final KindOfTransportRepository transportRepository;
+//    private final int TRANSPORT_ID = 2;
 
 //    @Test
 //    void findByIdTest() {

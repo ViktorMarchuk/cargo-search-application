@@ -10,7 +10,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 @IT
 @RequiredArgsConstructor
 public class ContactServiceTest {
-//    private final ContactService contactService;
+    private final ContactService contactService;
 //
 //    @Test
 //    void getIdByNameTest() {

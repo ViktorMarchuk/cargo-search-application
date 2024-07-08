@@ -14,8 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @IT
 @RequiredArgsConstructor
 public class CountryRepositoryTestIT {
-    private final CountryRepository countryRepository;
-    private final int COUNTRY_ID = 1;
+//    private final CountryRepository countryRepository;
+//    private final int COUNTRY_ID = 1;
 
 //    @Test
 //    void findByIdTest() {

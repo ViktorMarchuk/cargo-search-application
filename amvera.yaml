@@ -1,5 +1,3 @@
----
-# используемое окружение
 meta:
   environment: jvm
   toolchain:
