@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @IT
 @RequiredArgsConstructor
 public class CityRepositoryTestIT {
-//    private final CityRepository cityRepository;
+    private final CityRepository cityRepository;
 //    private final int CITY_ID = 5;
 //    private final String CITY_NAME = "Kaunas";
 //

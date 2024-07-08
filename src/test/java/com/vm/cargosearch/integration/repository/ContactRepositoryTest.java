@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @IT
 @RequiredArgsConstructor
 public class ContactRepositoryTest {
-//    private final ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
 //
 //    @Test
 //    void findByContactNameTest() {

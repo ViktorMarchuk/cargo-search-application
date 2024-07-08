@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @IT
 @RequiredArgsConstructor
 public class KindOfTransportServiceTestIT {
-//    private final KindOfTransportService kindOfTransportService;
+    private final KindOfTransportService kindOfTransportService;
 //
 //    @Test
 //    void findAll() {

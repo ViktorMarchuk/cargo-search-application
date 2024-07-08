@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class CargoRepositoryTestIT {
 
-    private final EntityManager entityManager;
+//    private final EntityManager entityManager;
 
 //    @Test
 //    void findById() {

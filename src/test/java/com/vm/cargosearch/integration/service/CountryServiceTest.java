@@ -10,7 +10,7 @@ import java.util.List;
 @IT
 @RequiredArgsConstructor
 public class CountryServiceTest {
-//    private final CountryService countryService;
+    private final CountryService countryService;
 //
 //    @Test
 //    void findByCountryNameFilterTest() {

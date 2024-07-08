@@ -30,14 +30,14 @@ import static org.mockito.Mockito.when;
 @IT
 @RequiredArgsConstructor
 public class CargoServiceTestIT {
-    private final CargoService cargoService;
-    private final ContactRepository contactRepository;
-    private final CountryRepository countryRepository;
-    private final CityRepository cityRepository;
-    private final KindOfTransportRepository kindOfTransportRepository;
-    private final CargoRepository cargoRepository;
-    private final Long CARGO_ID = 3L;
-    private final int EXPECTED_PRICE = 4800;
+//    private final CargoService cargoService;
+//    private final ContactRepository contactRepository;
+//    private final CountryRepository countryRepository;
+//    private final CityRepository cityRepository;
+//    private final KindOfTransportRepository kindOfTransportRepository;
+//    private final CargoRepository cargoRepository;
+//    private final Long CARGO_ID = 3L;
+//    private final int EXPECTED_PRICE = 4800;
 
 //    @Test
 //    void getAllLoadingsByContactNameTest(){
