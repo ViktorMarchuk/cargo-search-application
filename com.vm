@@ -1,38 +1,41 @@
-2024-07-05T10:32:21.619+03:00  INFO 6584 --- [cargo-search] [main] c.vm.cargosearch.CargoSearchApplication  : Starting CargoSearchApplication using Java 21.0.2 with PID 6584 (C:\Users\Marchuk\IdeaProjects\IdeaUltimate\cargo-search\build\classes\java\main started by Marchuk in C:\Users\Marchuk\IdeaProjects\IdeaUltimate\cargo-search)
-2024-07-05T10:32:21.677+03:00  INFO 6584 --- [cargo-search] [main] c.vm.cargosearch.CargoSearchApplication  : No active profile set, falling back to 1 default profile: "default"
-2024-07-05T10:32:23.782+03:00  INFO 6584 --- [cargo-search] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-07-05T10:32:23.927+03:00  INFO 6584 --- [cargo-search] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 129 ms. Found 5 JPA repository interfaces.
-2024-07-05T10:32:25.175+03:00  INFO 6584 --- [cargo-search] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2024-07-05T10:32:25.196+03:00  INFO 6584 --- [cargo-search] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2024-07-05T10:32:25.197+03:00  INFO 6584 --- [cargo-search] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
-2024-07-05T10:32:25.568+03:00  INFO 6584 --- [cargo-search] [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-2024-07-05T10:32:25.575+03:00  INFO 6584 --- [cargo-search] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2024-07-05T10:32:25.576+03:00  INFO 6584 --- [cargo-search] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3625 ms
-2024-07-05T10:32:30.820+03:00  INFO 6584 --- [cargo-search] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-07-05T10:32:35.525+03:00  INFO 6584 --- [cargo-search] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@701d2b59
-2024-07-05T10:32:35.527+03:00  INFO 6584 --- [cargo-search] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-07-05T10:32:36.433+03:00  INFO 6584 --- [cargo-search] [main] liquibase.database                       : Set default schema name to cargo
-2024-07-05T10:32:38.916+03:00  INFO 6584 --- [cargo-search] [main] liquibase.changelog                      : Reading from cargo.databasechangelog
-2024-07-05T10:32:39.650+03:00  INFO 6584 --- [cargo-search] [main] liquibase.changelog                      : Reading from cargo.databasechangelog
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : UPDATE SUMMARY
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : Run:                          0
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : Previously run:               2
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : Filtered out:                 0
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : -------------------------------
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : Total change sets:            2
-2024-07-05T10:32:39.880+03:00  INFO 6584 --- [cargo-search] [main] liquibase.util                           : Update summary generated
-2024-07-05T10:32:40.093+03:00  INFO 6584 --- [cargo-search] [main] liquibase.lockservice                    : Successfully released change log lock
-2024-07-05T10:32:40.145+03:00  INFO 6584 --- [cargo-search] [main] liquibase.command                        : Command execution complete
-2024-07-05T10:32:40.426+03:00  INFO 6584 --- [cargo-search] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-07-05T10:32:40.542+03:00  INFO 6584 --- [cargo-search] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-07-05T10:32:40.619+03:00  INFO 6584 --- [cargo-search] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-07-05T10:32:40.990+03:00  INFO 6584 --- [cargo-search] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-07-05T10:32:43.212+03:00  INFO 6584 --- [cargo-search] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-07-05T10:32:44.713+03:00  INFO 6584 --- [cargo-search] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-07-05T10:32:45.178+03:00  INFO 6584 --- [cargo-search] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2024-07-05T10:32:47.289+03:00  INFO 6584 --- [cargo-search] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@522a9876, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@794ffe22, org.springframework.security.web.context.SecurityContextHolderFilter@7a0ebc03, org.springframework.security.web.header.HeaderWriterFilter@6d921d6b, org.springframework.web.filter.CorsFilter@2da16d31, org.springframework.security.web.authentication.logout.LogoutFilter@36d02719, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@521f2a23, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c5fbe8a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@76c6b12c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74a15f4, org.springframework.security.web.access.ExceptionTranslationFilter@2f7765f1, org.springframework.security.web.access.intercept.AuthorizationFilter@6ca1c156]
-2024-07-05T10:32:47.710+03:00  INFO 6584 --- [cargo-search] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2024-07-05T10:32:47.721+03:00  INFO 6584 --- [cargo-search] [main] c.vm.cargosearch.CargoSearchApplication  : Started CargoSearchApplication in 27.23 seconds (process running for 30.639)
-2024-07-05T10:33:31.220+03:00  INFO 6584 --- [cargo-search] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-07-05T10:33:31.221+03:00  INFO 6584 --- [cargo-search] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2024-07-05T10:33:31.223+03:00  INFO 6584 --- [cargo-search] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-07-08T14:27:06.036+03:00  INFO 3464 --- [cargo-search] [main] c.vm.cargosearch.CargoSearchApplication  : Starting CargoSearchApplication using Java 21.0.2 with PID 3464 (C:\Users\Marchuk\IdeaProjects\IdeaUltimate\cargo-search\build\classes\java\main started by Marchuk in C:\Users\Marchuk\IdeaProjects\IdeaUltimate\cargo-search)
+2024-07-08T14:27:06.391+03:00  INFO 3464 --- [cargo-search] [main] c.vm.cargosearch.CargoSearchApplication  : No active profile set, falling back to 1 default profile: "default"
+2024-07-08T14:27:09.945+03:00  INFO 3464 --- [cargo-search] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-08T14:27:10.193+03:00  INFO 3464 --- [cargo-search] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 227 ms. Found 5 JPA repository interfaces.
+2024-07-08T14:27:19.704+03:00  INFO 3464 --- [cargo-search] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-08T14:27:19.734+03:00  INFO 3464 --- [cargo-search] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-08T14:27:19.735+03:00  INFO 3464 --- [cargo-search] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-07-08T14:27:20.405+03:00  INFO 3464 --- [cargo-search] [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2024-07-08T14:27:20.412+03:00  INFO 3464 --- [cargo-search] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-08T14:27:20.413+03:00  INFO 3464 --- [cargo-search] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 13739 ms
+2024-07-08T14:27:21.087+03:00  INFO 3464 --- [cargo-search] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-08T14:27:23.028+03:00  INFO 3464 --- [cargo-search] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3be80ece
+2024-07-08T14:27:23.031+03:00  INFO 3464 --- [cargo-search] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-08T14:27:23.604+03:00  INFO 3464 --- [cargo-search] [main] liquibase.database                       : Set default schema name to cargo
+2024-07-08T14:27:24.131+03:00  INFO 3464 --- [cargo-search] [main] liquibase.changelog                      : Reading from cargo.databasechangelog
+2024-07-08T14:27:24.744+03:00  INFO 3464 --- [cargo-search] [main] liquibase.changelog                      : Reading from cargo.databasechangelog
+2024-07-08T14:27:24.834+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : UPDATE SUMMARY
+2024-07-08T14:27:24.834+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : Run:                          0
+2024-07-08T14:27:24.834+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : Previously run:               2
+2024-07-08T14:27:24.834+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : Filtered out:                 0
+2024-07-08T14:27:24.834+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : -------------------------------
+2024-07-08T14:27:24.834+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : Total change sets:            2
+2024-07-08T14:27:24.835+03:00  INFO 3464 --- [cargo-search] [main] liquibase.util                           : Update summary generated
+2024-07-08T14:27:25.144+03:00  INFO 3464 --- [cargo-search] [main] liquibase.lockservice                    : Successfully released change log lock
+2024-07-08T14:27:25.209+03:00  INFO 3464 --- [cargo-search] [main] liquibase.command                        : Command execution complete
+2024-07-08T14:27:25.412+03:00  INFO 3464 --- [cargo-search] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-08T14:27:25.521+03:00  INFO 3464 --- [cargo-search] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-07-08T14:27:25.579+03:00  INFO 3464 --- [cargo-search] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-08T14:27:25.895+03:00  INFO 3464 --- [cargo-search] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-08T14:27:27.517+03:00  INFO 3464 --- [cargo-search] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-08T14:27:29.421+03:00  INFO 3464 --- [cargo-search] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-08T14:27:29.930+03:00  INFO 3464 --- [cargo-search] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-08T14:27:31.913+03:00  INFO 3464 --- [cargo-search] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3b5fa30d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7d800902, org.springframework.security.web.context.SecurityContextHolderFilter@52418721, org.springframework.security.web.header.HeaderWriterFilter@587107c, org.springframework.web.filter.CorsFilter@1cb83205, org.springframework.security.web.authentication.logout.LogoutFilter@14fe2e62, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3b3fa4c0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7080e8fc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b9e4a2a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60af08b2, org.springframework.security.web.access.ExceptionTranslationFilter@8f2513c, org.springframework.security.web.access.intercept.AuthorizationFilter@2a85e4f4]
+2024-07-08T14:27:32.301+03:00  INFO 3464 --- [cargo-search] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-08T14:27:32.310+03:00  INFO 3464 --- [cargo-search] [main] c.vm.cargosearch.CargoSearchApplication  : Started CargoSearchApplication in 28.393 seconds (process running for 30.79)
+2024-07-08T14:29:43.339+03:00  INFO 3464 --- [cargo-search] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-08T14:29:43.340+03:00  INFO 3464 --- [cargo-search] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-08T14:29:43.342+03:00  INFO 3464 --- [cargo-search] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-07-08T14:48:50.919+03:00  INFO 3464 --- [cargo-search] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-08T14:48:50.922+03:00  INFO 3464 --- [cargo-search] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-07-08T14:48:52.420+03:00  INFO 3464 --- [cargo-search] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
